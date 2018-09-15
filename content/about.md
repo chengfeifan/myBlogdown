@@ -1,6 +1,6 @@
 ---
 title: "About"
-date: "2016-05-05T21:48:51-07:00"
+date: "2018-09-15"
 ---
 
-This is a "hello world" example website for the [**blogdown**](https://github.com/rstudio/blogdown) package. The theme was forked from [@jrutheiser/hugo-lithium-theme](https://github.com/jrutheiser/hugo-lithium-theme) and modified by [Yihui Xie](https://github.com/yihui/hugo-lithium).
+我是程非凡。我看到**blogdown**已经很久了，一直都想着用*Rmarkdown*直接写博文，但是因为懒，一直都没有弄。终于有一天，我觉得要开始把自己学的东西和思考东西写下来，所以我搭建了这个博客。争取每个星期写一篇博文，有生活的，人生感悟以及科研方面的内容。希望自己能坚持下去，写于2018年9月15号。
