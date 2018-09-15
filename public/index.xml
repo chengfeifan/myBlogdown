@@ -30,5 +30,22 @@
 写下这个博客，也是因为这句话‘你会记得你所写下的，但是你会忘记你所学以及所说的’，与君共勉。</description>
     </item>
     
+    <item>
+      <title>Rmarkdown中的dashboard</title>
+      <link>/2018/09/15/rmarkdown-dashboard/</link>
+      <pubDate>Sat, 15 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/09/15/rmarkdown-dashboard/</guid>
+      <description> Dashboard 最近因为项目的需求，需要做一个演示的网站。之前对于R语言中的dashboard有一些印象，所以准备用dashboard做一个。
+关于Dashboard学习的一些网站：
+ flexdashboard R Markdown: The Definitive Guide  在dashboard中，首先将需要的包和内容放在setup里
+library(dygraphs)  在dashboard中，每个页面的分级用
+=========================================
+页面中每一栏可以用
+Column -----------------------------------------  每一节内容可以markdown的三号标题替代，这里要说tabnet的性质，如果不想整个页面在Dashboard上铺开，在后面加上这个性质
+另外，要在dashboard上增加shiny的组件，可以考虑在目标栏上添加
+runtime: shiny  </description>
+    </item>
+    
   </channel>
 </rss>
