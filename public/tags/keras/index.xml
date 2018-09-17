@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Keras on Blog of Feifan Cheng</title>
+    <link>/tags/keras/</link>
+    <description>Recent content in Keras on Blog of Feifan Cheng</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 17 Sep 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/keras/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>条件变分自动编码器（Conditional variational autoencoder）</title>
+      <link>/2018/09/17/conditional-variational-autoencoder/</link>
+      <pubDate>Mon, 17 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/09/17/conditional-variational-autoencoder/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

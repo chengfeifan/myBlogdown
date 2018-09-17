@@ -1,0 +1,100 @@
+---
+title: 条件变分自动编码器（Conditional variational auoencoder）
+author: ~
+date: '2018-09-17'
+slug: conditional-variational-auoencoder
+categories: []
+tags: []
+output:
+  blogdown::html_page:
+    toc: true
+    number_sections: true
+---
+
+# 概述
+*keras* 作为深度学习的框架之一，之前一直用 *python* 来写 *keras* 的代码，但是[R语言支持keras](https://keras.rstudio.com)，有一个想法就是，利用条件自动编码器来生成数据用于训练，所以用 *R* 中 *keras* 来编写一下模型。
+
+# Getting started
+安装 *keras* 的包
+
+```
+install.packages("keras")
+```
+*keras* 默认使用 *tensorflow* 作为后台，如果需要更改，请参见`install_keras()`的帮助
+
+```{r}
+library(keras)
+install_keras()
+```
+
+## A small example
+
+```{r}
+# prepare data
+library(keras)
+mnist <- dataset_mnist()
+x_train <- mnist$train$x
+y_train <- mnist$train$y
+x_test <- mnist$test$x
+y_test <- mnist$test$y
+
+# reshape
+x_train <- array_reshape(x_train, c(nrow(x_train), 784))
+x_test <- array_reshape(x_test, c(nrow(x_test), 784))
+# rescale
+x_train <- x_train / 255
+x_test <- x_test / 255
+
+y_train <- to_categorical(y_train, 10)
+y_test <- to_categorical(y_test, 10)
+
+# define the model
+model <- keras_model_sequential() 
+model %>% 
+  layer_dense(units = 256, activation = 'relu', input_shape = c(784)) %>% 
+  layer_dropout(rate = 0.4) %>% 
+  layer_dense(units = 128, activation = 'relu') %>%
+  layer_dropout(rate = 0.3) %>%
+  layer_dense(units = 10, activation = 'softmax')
+
+summary(model)
+```
+
+**model compile**
+
+```{r}
+model %>% compile(
+  loss = 'categorical_crossentropy',
+  optimizer = optimizer_rmsprop(),
+  metrics = c('accuracy')
+)
+```
+
+**model train**
+
+```{r}
+history <- model %>% fit(
+  x_train, y_train, 
+  epochs = 30, batch_size = 128, 
+  validation_split = 0.2
+)
+```
+
+**plot training process**
+
+```{r}
+plot(history)
+```
+
+**model evaluate**
+
+```{r}
+model %>% evaluate(x_test, y_test)
+```
+
+**model prediction**
+
+```{r}
+model %>% predict_classes(x_test)
+```
+

@@ -22,6 +22,18 @@
     </item>
     
     <item>
+      <title>条件变分自动编码器（Conditional variational auoencoder）</title>
+      <link>/2018/09/17/conditional-variational-auoencoder/</link>
+      <pubDate>Mon, 17 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/09/17/conditional-variational-auoencoder/</guid>
+      <description>1 概述 2 Getting started 2.1 A small example    1 概述 keras 作为深度学习的框架之一，之前一直用 python 来写 keras 的代码，但是R语言支持keras，有一个想法就是，利用条件自动编码器来生成数据用于训练，所以用 R 中 keras 来编写一下模型。
+ 2 Getting started 安装 keras 的包
+install.packages(&amp;quot;keras&amp;quot;) keras 默认使用 tensorflow 作为后台，如果需要更改，请参见install_keras()的帮助
+library(keras) ## Warning: 程辑包&amp;#39;keras&amp;#39;是用R版本3.4.4 来建造的 install_keras() ## Creating virtualenv for TensorFlow at ~/.virtualenvs/r-tensorflow ## Installing TensorFlow ... ## ## Installation complete. 2.1 A small example # prepare data library(keras) mnist &amp;lt;- dataset_mnist() x_train &amp;lt;- mnist$train$x y_train &amp;lt;- mnist$train$y x_test &amp;lt;- mnist$test$x y_test &amp;lt;- mnist$test$y # reshape x_train &amp;lt;- array_reshape(x_train, c(nrow(x_train), 784)) x_test &amp;lt;- array_reshape(x_test, c(nrow(x_test), 784)) # rescale x_train &amp;lt;- x_train / 255 x_test &amp;lt;- x_test / 255 y_train &amp;lt;- to_categorical(y_train, 10) y_test &amp;lt;- to_categorical(y_test, 10) # define the model model &amp;lt;- keras_model_sequential() model %&amp;gt;% layer_dense(units = 256, activation = &amp;#39;relu&amp;#39;, input_shape = c(784)) %&amp;gt;% layer_dropout(rate = 0.</description>
+    </item>
+    
+    <item>
       <title>感情的问题</title>
       <link>/2018/09/16/%E6%84%9F%E6%83%85%E7%9A%84%E9%97%AE%E9%A2%98/</link>
       <pubDate>Sun, 16 Sep 2018 00:00:00 +0000</pubDate>
@@ -40,7 +52,7 @@
       <pubDate>Sat, 15 Sep 2018 00:00:00 +0000</pubDate>
       
       <guid>/2018/09/15/first-blogdown/</guid>
-      <description>第一篇博文 非常感谢yihui xie写出的*blogdown*，因为他用不习惯写*blog*的一些软件，才有了*blogdown*。的确是找到了痛点，才能够有所进步。感觉在清华本科毕业之后，博士生涯的进步都非常慢，一部分因为自己懈怠了，另外一部分可能是自己的研究并没有解决生活中的痛点。其实，我一直都想着成为一个金融行业的从业者，但是因为自己随波逐流，还在原来的专业里面，成为了一个化工的博士。虽然是数据方向，但是老师给的指导有限，导致研究的进展非常缓慢。而且我自己也是一个完美主义的人，任何事情想着怎么才可以做的完美，导致自己写的文章很少，而且经常追求那些华而不实的东西；另外一个方面，我是一个不喜欢总结，老是喜欢学新东西的人，这一点的确是让人烦恼，基本上别人提的东西你都有一个大致的概念，但是没有特别深入了解。
+      <description>第一篇博文 非常感谢yihui xie写出的 blogdown ，因为他用不习惯写 blog 的一些软件，才有了 blogdown 。的确是找到了痛点，才能够有所进步。感觉在清华本科毕业之后，博士生涯的进步都非常慢，一部分因为自己懈怠了，另外一部分可能是自己的研究并没有解决生活中的痛点。其实，我一直都想着成为一个金融行业的从业者，但是因为自己随波逐流，还在原来的专业里面，成为了一个化工的博士。虽然是数据方向，但是老师给的指导有限，导致研究的进展非常缓慢。而且我自己也是一个完美主义的人，任何事情想着怎么才可以做的完美，导致自己写的文章很少，而且经常追求那些华而不实的东西；另外一个方面，我是一个不喜欢总结，老是喜欢学新东西的人，这一点的确是让人烦恼，基本上别人提的东西你都有一个大致的概念，但是没有特别深入了解。
 写下这个博客，也是因为这句话‘你会记得你所写下的，但是你会忘记你所学以及所说的’，与君共勉。</description>
     </item>
     
