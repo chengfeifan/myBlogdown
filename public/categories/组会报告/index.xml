@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>组会报告 on Blog of Feifan Cheng</title>
+    <link>/categories/%E7%BB%84%E4%BC%9A%E6%8A%A5%E5%91%8A/</link>
+    <description>Recent content in 组会报告 on Blog of Feifan Cheng</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 17 Sep 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/%E7%BB%84%E4%BC%9A%E6%8A%A5%E5%91%8A/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>2018年第一次组会</title>
+      <link>/2018/09/17/2018/</link>
+      <pubDate>Mon, 17 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/09/17/2018/</guid>
+      <description>毕可鑫：中粮米粒留皮率识别和碎米识别，留皮率识别利用颜色区别（KNN算法），碎米率利用米粒长径来判断
+刘昊雨：氢燃料电池，存在诸多薄弱环节，需要消除产业发展制约因素。</description>
+    </item>
+    
+  </channel>
+</rss>
