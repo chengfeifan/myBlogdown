@@ -27,7 +27,7 @@
       <pubDate>Mon, 17 Sep 2018 00:00:00 +0000</pubDate>
       
       <guid>/2018/09/17/conditional-variational-auoencoder/</guid>
-      <description>1 概述 2 Getting started 2.1 A small example    1 概述 keras 作为深度学习的框架之一，之前一直用 python 来写 keras 的代码，但是R语言支持keras，有一个想法就是，利用条件自动编码器来生成数据用于训练，所以用 R 中 keras 来编写一下模型。
+      <description>1 概述 2 Getting started 2.1 A small example 2.2 variational autoencoder    1 概述 keras 作为深度学习的框架之一，之前一直用 python 来写 keras 的代码，但是R语言支持keras，有一个想法就是，利用条件自动编码器来生成数据用于训练，所以用 R 中 keras 来编写一下模型。
  2 Getting started 安装 keras 的包
 install.packages(&amp;quot;keras&amp;quot;) keras 默认使用 tensorflow 作为后台，如果需要更改，请参见install_keras()的帮助
 library(keras) ## Warning: 程辑包&amp;#39;keras&amp;#39;是用R版本3.4.4 来建造的 install_keras() ## Creating virtualenv for TensorFlow at ~/.virtualenvs/r-tensorflow ## Installing TensorFlow ... ## ## Installation complete. 2.1 A small example # prepare data library(keras) mnist &amp;lt;- dataset_mnist() x_train &amp;lt;- mnist$train$x y_train &amp;lt;- mnist$train$y x_test &amp;lt;- mnist$test$x y_test &amp;lt;- mnist$test$y # reshape x_train &amp;lt;- array_reshape(x_train, c(nrow(x_train), 784)) x_test &amp;lt;- array_reshape(x_test, c(nrow(x_test), 784)) # rescale x_train &amp;lt;- x_train / 255 x_test &amp;lt;- x_test / 255 y_train &amp;lt;- to_categorical(y_train, 10) y_test &amp;lt;- to_categorical(y_test, 10) # define the model model &amp;lt;- keras_model_sequential() model %&amp;gt;% layer_dense(units = 256, activation = &amp;#39;relu&amp;#39;, input_shape = c(784)) %&amp;gt;% layer_dropout(rate = 0.</description>
