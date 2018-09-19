@@ -71,20 +71,20 @@
     
 
     <div class="article-content">
-      
+      <p>因为之前一直使用团队服务器挂掉了，现在开始用组内的服务器。平常用习惯了 <em>Jupyter notebook</em> ，所以也考虑在组内服务器上使用，并在网页端访问。其实整个配置过程非常简单。一般在服务器上安装了<code>Anaconda</code>之后，就会自带 <em>Jupyter notebook</em> ，因此就只剩下配置了。</p>
 
-<p>因为之前一直使用团队服务器挂掉了，现在开始用组内的服务器。平常用习惯了 <em>Jupyter notebook</em> ，所以也考虑在组内服务器上使用，并在网页端访问。其实整个配置过程非常简单。一般在服务器上安装了<code>Anaconda</code>之后，就会自带 <em>Jupyter notebook</em> ，因此就只剩下配置了。</p>
+<ul>
+<li>配置过程</li>
+</ul>
 
-<h1 id="配置过程">配置过程</h1>
-
-<ol>
-<li><p>生成配置文件</p>
+<p>生成配置文件</p>
 
 <pre><code>jupyter notebook --generate-config
-</code></pre></li>
+</code></pre>
 
-<li><p>进入 <code>python</code> 界面中，使用命令设置 password</p></li>
-</ol>
+<ul>
+<li>进入 <code>python</code> 界面中，使用命令设置 password</li>
+</ul>
 
 <pre><code>from notebook.auth import passwd
 passwd()
@@ -95,16 +95,16 @@ passwd()
 <pre><code>$ jupyter notebook password
 </code></pre>
 
-<ol>
+<ul>
 <li>生成ssl证书</li>
-</ol>
+</ul>
 
 <pre><code>openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout mykey.key -out mycert.pem
 </code></pre>
 
-<ol>
+<ul>
 <li>更改配置文件 <code>/root/.jupyter/jupyter_notebook_config.py</code></li>
-</ol>
+</ul>
 
 <pre><code># Set options for certfile, ip, password, and toggle off
 # browser auto-opening
@@ -119,11 +119,11 @@ c.NotebookApp.open_browser = False
 c.NotebookApp.port = 8888
 </code></pre>
 
-<ol>
+<ul>
 <li><p>设置根目录，在配置文件 <code>/root/.jupyter/jupyter_notebook_config.py</code> 找到 <code>c.NotebookApp.dir</code>，更改根目录。可以输入<code>:\dir</code>进行查找</p></li>
 
 <li><p>运行jupyter notebook 作为后台程序</p></li>
-</ol>
+</ul>
 
 <pre><code>nohup jupyter notebook --allow-root &amp;
 </code></pre>
