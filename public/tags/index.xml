@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>Centos</title>
+      <link>/tags/centos/</link>
+      <pubDate>Wed, 19 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/centos/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Dashboard</title>
       <link>/tags/dashboard/</link>
       <pubDate>Sat, 15 Sep 2018 00:00:00 +0000</pubDate>
@@ -35,6 +44,15 @@
       <pubDate>Sun, 16 Sep 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/dear/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Jupyter</title>
+      <link>/tags/jupyter/</link>
+      <pubDate>Wed, 19 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/jupyter/</guid>
       <description></description>
     </item>
     

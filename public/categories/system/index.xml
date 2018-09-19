@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>System on Blog of Feifan Cheng</title>
+    <link>/categories/system/</link>
+    <description>Recent content in System on Blog of Feifan Cheng</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 19 Sep 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/system/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Jupyter notebook服务器端安装</title>
+      <link>/2018/09/19/jupyter-notebook/</link>
+      <pubDate>Wed, 19 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/09/19/jupyter-notebook/</guid>
+      <description>因为之前一直使用团队服务器挂掉了，现在开始用组内的服务器。平常用习惯了 Jupyter notebook ，所以也考虑在组内服务器上使用，并在网页端访问。其实整个配置过程非常简单。一般在服务器上安装了Anaconda之后，就会自带 Jupyter notebook ，因此就只剩下配置了。
+配置过程  生成配置文件
+jupyter notebook --generate-config  进入 python 界面中，使用命令设置 password
+  from notebook.auth import passwd passwd()  或者是
+$ jupyter notebook password   生成ssl证书  openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout mykey.key -out mycert.pem   更改配置文件 /root/.jupyter/jupyter_notebook_config.py  # Set options for certfile, ip, password, and toggle off # browser auto-opening c.NotebookApp.certfile = u&#39;/absolute/path/to/your/certificate/mycert.pem&#39; c.NotebookApp.keyfile = u&#39;/absolute/path/to/your/certificate/mykey.</description>
+    </item>
+    
+  </channel>
+</rss>
