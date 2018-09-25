@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/2018/09/25/%E4%B8%AD%E7%A7%8B%E5%81%87%E6%97%A5/</loc>
+    <lastmod>2018-09-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/2018/09/19/jupyter-notebook/</loc>
     <lastmod>2018-09-19T00:00:00+00:00</lastmod>
   </url>
@@ -44,7 +49,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2018-09-19T00:00:00+00:00</lastmod>
+    <lastmod>2018-09-25T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -84,6 +89,12 @@
   </url>
   
   <url>
+    <loc>/tags/holiday/</loc>
+    <lastmod>2018-09-25T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/jupyter/</loc>
     <lastmod>2018-09-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -103,7 +114,7 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2018-09-19T00:00:00+00:00</lastmod>
+    <lastmod>2018-09-25T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -128,6 +139,12 @@
   <url>
     <loc>/tags/</loc>
     <lastmod>2018-09-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/%E6%9D%82%E8%B0%88/</loc>
+    <lastmod>2018-09-25T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
