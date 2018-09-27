@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>R on Blog of Feifan Cheng</title>
-    <link>/categories/r/</link>
-    <description>Recent content in R on Blog of Feifan Cheng</description>
+    <title>Radix on Blog of Feifan Cheng</title>
+    <link>/tags/radix/</link>
+    <description>Recent content in Radix on Blog of Feifan Cheng</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 27 Sep 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/radix/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -24,23 +24,6 @@ Reader-friendly typography that adapts well to mobile devices.（界面友好，
  Flexible figure layout options (弹性的图片图层，例如图片长度可以比文章长)
  Attractively rendered tables with optional support for pagination. (表可以增加页码)
  Support for a wide variety of diagramming tools for illustrating concepts.(支持多种流程图工具，例如DiagrammeR)</description>
-    </item>
-    
-    <item>
-      <title>Rmarkdown中的dashboard</title>
-      <link>/2018/09/15/rmarkdown-dashboard/</link>
-      <pubDate>Sat, 15 Sep 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/2018/09/15/rmarkdown-dashboard/</guid>
-      <description> Dashboard 最近因为项目的需求，需要做一个演示的网站。之前对于R语言中的dashboard有一些印象，所以准备用dashboard做一个。
-关于Dashboard学习的一些网站：
- flexdashboard R Markdown: The Definitive Guide  在dashboard中，首先将需要的包和内容放在setup里
-library(dygraphs)  在dashboard中，每个页面的分级用
-=========================================
-页面中每一栏可以用
-Column -----------------------------------------  每一节内容可以markdown的三号标题替代，这里要说tabnet的性质，如果不想整个页面在Dashboard上铺开，在后面加上这个性质
-另外，要在dashboard上增加shiny的组件，可以考虑在目标栏上添加
-runtime: shiny  </description>
     </item>
     
   </channel>

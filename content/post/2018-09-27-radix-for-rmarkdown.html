@@ -1,0 +1,56 @@
+---
+title: Radix for Rmarkdown
+author: ~
+date: '2018-09-27'
+slug: radix-for-rmarkdown
+categories: [R]
+tags: [Radix,Package]
+output: 
+  blogdown::html_page:
+    toc: true
+    number_sections: true
+---
+
+
+<div id="TOC">
+<ul>
+<li><a href="#radix"><span class="toc-section-number">1</span> 关于Radix</a><ul>
+<li><a href="#radix"><span class="toc-section-number">1.1</span> Radix的新特性</a></li>
+<li><a href="#installation"><span class="toc-section-number">1.2</span> installation</a></li>
+<li><a><span class="toc-section-number">1.3</span> 创建文件</a></li>
+</ul></li>
+</ul>
+</div>
+
+<div id="radix" class="section level1">
+<h1><span class="header-section-number">1</span> 关于Radix</h1>
+<p><em>Radix</em> 是新的 <em>Rmarkdown</em> 的模板，主要是方便科学技术写作，的确现在许多科学论文都以电子版的方式初版，有很多板式，如果真的可以统一一个格式，的确给科研工作者带来很多方便。</p>
+<div id="radix" class="section level2">
+<h2><span class="header-section-number">1.1</span> Radix的新特性</h2>
+<p><a href="https://rstudio.github.io/radix/">参考链接</a></p>
+<ol style="list-style-type: decimal">
+<li><p>Reader-friendly typography that adapts well to mobile devices.（界面友好，同时可以适应移动设备）</p></li>
+<li><p>Features essential to technical writing like LaTeX math, citations, and footnotes. (支持Latex数学公式，引用和脚注)</p></li>
+<li><p>Flexible figure layout options (弹性的图片图层，例如图片长度可以比文章长)</p></li>
+<li><p>Attractively rendered tables with optional support for pagination. (表可以增加页码)</p></li>
+<li><p>Support for a wide variety of diagramming tools for illustrating concepts.(支持多种流程图工具，例如DiagrammeR)</p></li>
+<li><p>The ability to incorporate JavaScript and D3-based interactive visualizations. (支持JS和D3的交互式可视化)</p></li>
+<li><p>A variety of ways to publish articles, including support for publishing sets of articles as a Radix website. (支持多种方式发表文章，包括支持Radix的网站)</p></li>
+<li><p>The ability to create a blog composed of a collection of Radix articles. (可以将这些文章变成一个博客)</p></li>
+</ol>
+</div>
+<div id="installation" class="section level2">
+<h2><span class="header-section-number">1.2</span> installation</h2>
+<pre><code>devtools::install_github(&quot;rstudio/radix&quot;)</code></pre>
+</div>
+<div class="section level2">
+<h2><span class="header-section-number">1.3</span> 创建文件</h2>
+<ol style="list-style-type: decimal">
+<li><p>直接通过Rmarkdown template新建
+<img src="https://rstudio.github.io/radix/images/new_radix_article.png" alt="创建文件" /></p></li>
+<li><p>通过下面的指令来创建</p></li>
+</ol>
+<pre><code>library(rmarkdown)
+draft(&quot;article.Rmd&quot;, &quot;radix_article&quot;, package = &quot;radix&quot;)</code></pre>
+</div>
+</div>
