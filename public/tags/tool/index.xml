@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tool on Blog of Feifan Cheng</title>
+    <link>/tags/tool/</link>
+    <description>Recent content in Tool on Blog of Feifan Cheng</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 27 Sep 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/tool/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>R语言有用的一些网站</title>
+      <link>/2018/09/27/r/</link>
+      <pubDate>Thu, 27 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/09/27/r/</guid>
+      <description> ***.rstudio.com 数据库  数据库连接 数据库连接问题 初始化连接设置  交互  shiny shiny article Interactive Visualization with JavaScript and R Working with JavaScript Syntax in R  </description>
+    </item>
+    
+  </channel>
+</rss>

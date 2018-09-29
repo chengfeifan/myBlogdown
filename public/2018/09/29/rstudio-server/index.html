@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.38.2" />
+
+
+<title>Rstudio server安装脚本 - Blog of Feifan Cheng</title>
+<meta property="og:title" content="Rstudio server安装脚本 - Blog of Feifan Cheng">
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.11.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.jpg"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="https://github.com/chengfeifan/myBlogdown">GitHub</a></li>
+    
+    <li><a href="https://weibo.com/3012495997/">微博</a></li>
+    
+    <li><a href="/contact/">Contact</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">1 min read</span>
+    
+
+    <h1 class="article-title">Rstudio server安装脚本</h1>
+
+    
+    <span class="article-date">2018/09/29</span>
+    
+
+    <div class="article-content">
+      
+
+<h1 id="rstudio服务器安装脚本">Rstudio服务器安装脚本</h1>
+
+<pre><code># 安装 epel源
+ yum -y install epel-release
+ # 更新
+ yum update
+ # 获取R的安装包
+ wget https://cran.r-project.org/src/base/R-3/R-3.3.2.tar.gz
+ tar zxvf R-3.3.2.tar.gz
+ cd R-3.3.2.tar.gz
+ # 安装gcc编译器
+ yum install glibc-headers gcc-c++
+ # 安装Fortran编译器
+ yum install gcc-gfortran
+ # 安装
+ yum install readline-devel
+ # 安装
+ yum install libXt-devel
+ # 安装
+ ./configure --with-readline=no --with-x=no
+ make
+ make install
+
+# 安装 r
+# yum install r-base;
+# 安装r-studio
+wget https://download2.rstudio.org/rstudio-server-rhel-1.0.136-x86_64.rpm;
+sudo yum install --nogpgcheck rstudio-server-rhel-1.0.136-x86_64.rpm;
+# 检验 rstudio-server是否成功安装
+rstudio-server verify-installation
+# 开放端口 8787
+iptables -I INPUT -p tcp --dport 8787 -j ACCEPT;
+# 启动rstudio
+rstudio-server start
+</code></pre>
+
+<h4 id="配置文件-rsession-conf-和-rserver-conf">配置文件<code>rsession.conf</code>和<code>rserver.conf</code></h4>
+
+<p>在<code>rsession.conf</code>文件中添加</p>
+
+<pre><code>rsession-which-r=/usr/local/bin/R
+</code></pre>
+
+<p>在<code>rserver.conf</code>中添加</p>
+
+<pre><code>#改变端口
+www-port=80
+# 改变ip地址
+www-address=127.0.0.1
+</code></pre>
+
+<p>编译环境</p>
+
+<pre><code>yum -y install gcc 
+yum install glibc-headers 
+yum install gcc-c++ 
+yum install gcc-gfortran 
+yum install readline-devel 
+yum install libXt-devel
+</code></pre>
+
+<h4 id="安装问题">安装问题</h4>
+
+<ol>
+<li><p>configure: error: zlib library and headers are required</p>
+
+<pre><code>yum -y install bzip2-devel 
+
+yum install R
+</code></pre></li>
+</ol>
+
+<h4 id="安装完所有环境之后-可以直接用指令安装">安装完所有环境之后，可以直接用指令安装</h4>
+
+<pre><code>yum install R
+</code></pre>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+
+    
+  </body>
+</html>
+
