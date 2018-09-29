@@ -21,6 +21,31 @@
     </item>
     
     <item>
+      <title>shiny包使用</title>
+      <link>/2018/09/29/shiny/</link>
+      <pubDate>Sat, 29 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/09/29/shiny/</guid>
+      <description>#shiny包的使用 shiny作为Rstudio中一个非常重要的包，对于构建交互式的网页非常方便。一般由shiny构筑的网页，由两个文件构成:ui.R和server.R，下面分别对两者的组件进行介绍。 在运行程序的时候，需要将ui.R和server.R放入同一个文件夹之中
+ui里面的一些组件 ui输入 ####ui.R一般的框架
+library(shiny) shinyUI(fluidPage( # 标题 titlePanel(&amp;quot;title name&amp;quot;), # 边栏 sidebarPanel( #选择块 selectInput(&amp;quot;dataset&amp;quot;,&amp;quot;choose a dataset&amp;quot;,choices=c(&amp;quot;A&amp;quot;,&amp;quot;B&amp;quot;)) ) #主栏 mainPanel() ))  selectInput selectInput提供下拉菜单的选择，输入格式：
+selectInput(&amp;quot;data&amp;quot;,&amp;quot;choose&amp;quot;,choices=c(&amp;quot;A&amp;quot;,&amp;quot;B&amp;quot;))
+data是用于储存变量的名称（可以在server.R中以input$data调用），choose是输入说明，choices给出下拉变量的选择
+numericInput 顾名思义，numericInput是用来输入数值类型数据，其输入格式： numericInput(&amp;quot;num&amp;quot;,&amp;quot;type a number&amp;quot;,10)
+其中num是用于储存变量的名称（可以再server.R中以input$num调用），type a number是说明信息，10是输入的数据
+checkboxInput勾选组件 有时候，我们可以选择某些图形是否出现，可以通过勾选是否要这个内容来实现，所以这个输入的变量只会出现TRUE或者FALSE，也就是说这个变量是bool型变量
+checkboxInput(&amp;quot;out&amp;quot;,&amp;quot;Output&amp;quot;,FALSE)  其中out是用来储存bool型变量，Output是对变量进行的说明，FALSE是取值
+checkboxGroupInput多勾选组件 有时候我们需要对内容进行多选，这样就需要多项选择
+checkboxGroupInput(&amp;quot;cities&amp;quot;,&amp;quot;choose Cities&amp;quot;,cities)  这样子就可以实现多项选择了
+sliderInput定制化滑动条 通过滑动滑动条来选择数据，是一件非常酷炫的事情，下面给出一个例子
+sliderInput(&amp;quot;integer&amp;quot;,&amp;quot;Integer:&amp;quot;, min=0,max=1000,value=500,step=1)  其中integer用来储存变量，Interger:是说明，min代表着滑动条的最小值，max代表着滑动条的最大值，value代表着滑动条初始值，step代表着滑动条的间隔
+若需要输入区间范围，可以增加两个变量，例如
+sliderInput(&amp;quot;range&amp;quot;,&amp;quot;Range:&amp;quot;, min=0,max=1000,value=c(200,500))  其中range用来储存变量，只不过此时的变量变成了一个vector
+radioButtons选项卡 我们常常会给出一些选项来，还是直接举例子：
+radioButtons(&amp;quot;dist&amp;quot;,&amp;quot;Distribution type:&amp;quot;, list(&amp;quot;Norm&amp;quot;=&amp;quot;norm&amp;quot;, &amp;quot;Uniform&amp;quot;=&amp;quot;unif&amp;quot;, &amp;quot;Log-normal&amp;quot;=&amp;quot;lnorm&amp;quot;, &amp;quot;Exponential&amp;quot;=&amp;quot;exp&amp;quot; ) ), br(),  其中dist依旧是用于储存变量，Distribution依旧是对变量的说明，而list中，左端代表着展现出来选项，等号右边是选项对应的值，当然在server.</description>
+    </item>
+    
+    <item>
       <title>Radix for Rmarkdown</title>
       <link>/2018/09/27/radix-for-rmarkdown/</link>
       <pubDate>Thu, 27 Sep 2018 00:00:00 +0000</pubDate>

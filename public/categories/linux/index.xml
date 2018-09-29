@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux on Blog of Feifan Cheng</title>
+    <link>/categories/linux/</link>
+    <description>Recent content in Linux on Blog of Feifan Cheng</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 29 Sep 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Hadoop搭建</title>
+      <link>/2018/09/29/hadoop/</link>
+      <pubDate>Sat, 29 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/09/29/hadoop/</guid>
+      <description>小规模Spark集群搭建  此方法只适用于小规模机群搭建，对于大规模集群搭建，请学习脚本配置。本次搭建的服务器有六台，每台服务器的处理器为 Intel&amp;reg; Core&amp;trade; i5-3450 CPU @ 3.10GHz，内存为8GB。服务器的静态IP为166.111.17.69，搭建底层系统为centos7.0
+ centos7.0安装  制作centos7.0 的光驱文件 安装master服务器时注意需要安装图形界面，因为学校联网需要认证 安装时，选择其他服务器时，选择安全工具和java平台 需要设置网络，可以在开始安装时设置网络。网络配置文件在目录/etc/sysconfig/net-work-scripts/下，将DNS设置为166.111.8.29和166.111.8.28（学校DNS服务器），以及将ONBOOT设置为on 网线连接，即可以进行配置  Hadoop2.6.0搭建 ssh登录免密码设置 以root的身份登录服务器，修改服务器的名称
+nano /etc/hosts  修改配置文件
+166.111.17.69 master 166.111.17.121 node1 166.111.17.122 node2 166.111.17.123 node3 166.111.17.124 node4 166.111.17.125 node5  在每一台服务器上添加名为hadoop用户
+useradd hadoop passwd hadoop  在master服务器上产生密钥对，将公共秘钥分配给其他服务器
+su hadoop ssh-keygen -t rsa ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop@master ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop@node1 ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop@node2 ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop@node3 ssh-copy-id -i ~/.</description>
+    </item>
+    
+    <item>
+      <title>owncloud配置问题</title>
+      <link>/2018/09/29/owncloud/</link>
+      <pubDate>Sat, 29 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/09/29/owncloud/</guid>
+      <description>owncloud安装的相关问题 安装命令： sudo rpm --import https://download.owncloud.org/download/repositories/stable/CentOS_7/repodata/repomd.xml.key； sudo curl -L https://download.owncloud.org/download/repositories/stable/CentOS_7/ce:stable.repo -o /etc/yum.repos.d/ownCloud.repo； sudo yum clean expire-cache； sudo yum install owncloud；  数据库安装： 安装出现的问题： 1.无法启动mysql
+ERROR 2002 (HY000): Can&#39;t connect to local MySQL server through socket &#39;/var/lib/mysql/mysql.sock&#39; (2)
+解决方法： sudo yum install mariadb-server sudo systemctl start mariadb
+ 开放端口  firewall-cmd --permanent --zone=public --add-port=8080/tcp iptables -I INPUT -p tcp --dport 80 -j ACCEPT
+维护出现的问题 维护时候发现owncloud进入了维护模式，这个时候我们需要关掉这个模式：
+sudo -u apache php occ maintenance:mode --off</description>
+    </item>
+    
+    <item>
+      <title>samba配置问题</title>
+      <link>/2018/09/29/samba/</link>
+      <pubDate>Sat, 29 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/09/29/samba/</guid>
+      <description>Samba服务器配置  为了解决团队文件共享问题，决定搭建一个samba服务器来解决所有问题，下面就将samba服务搭建过程详细地写下来
+ Samba服务安装 在centos系统中直接输入：yum install samba
+Samba配置 Samba服务的配置文件在\etc\samba\smb.conf
+配置实例  添加群组：groupadd admin 添加用户：useradd -g admin chengff 添加samba用户：smbpasswd -a chengff 创建共享文件夹：
+mkdir /share/public chgrp admin /share/public chmod 770 /share/public chmod g+s /share/public  修改配置文件
+[public] comment = Complete Public Folder path = /share/public browseable = yes guest ok = yes writable = yes directory mask = 0777 create mask =0666 valid users = @admin write list = @admin  开放端口，我在/home/chengff/openSamba.</description>
+    </item>
+    
+  </channel>
+</rss>

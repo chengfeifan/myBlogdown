@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Samba on Blog of Feifan Cheng</title>
+    <link>/tags/samba/</link>
+    <description>Recent content in Samba on Blog of Feifan Cheng</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 29 Sep 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/samba/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>samba配置问题</title>
+      <link>/2018/09/29/samba/</link>
+      <pubDate>Sat, 29 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/09/29/samba/</guid>
+      <description>Samba服务器配置  为了解决团队文件共享问题，决定搭建一个samba服务器来解决所有问题，下面就将samba服务搭建过程详细地写下来
+ Samba服务安装 在centos系统中直接输入：yum install samba
+Samba配置 Samba服务的配置文件在\etc\samba\smb.conf
+配置实例  添加群组：groupadd admin 添加用户：useradd -g admin chengff 添加samba用户：smbpasswd -a chengff 创建共享文件夹：
+mkdir /share/public chgrp admin /share/public chmod 770 /share/public chmod g+s /share/public  修改配置文件
+[public] comment = Complete Public Folder path = /share/public browseable = yes guest ok = yes writable = yes directory mask = 0777 create mask =0666 valid users = @admin write list = @admin  开放端口，我在/home/chengff/openSamba.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -72,4 +72,8 @@ tags: [Rstudio server]
 		
 #### 安装完所有环境之后，可以直接用指令安装
 	yum install R
-	
+
+#### 启动指令
+
+    iptables -I INPUT -p tcp --dport 8787 -j ACCEPT;
+    sudo rstudio-server start;

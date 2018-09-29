@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.38.2" />
+
+
+<title>shiny包使用 - Blog of Feifan Cheng</title>
+<meta property="og:title" content="shiny包使用 - Blog of Feifan Cheng">
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.11.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.jpg"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="https://github.com/chengfeifan/myBlogdown">GitHub</a></li>
+    
+    <li><a href="https://weibo.com/3012495997/">微博</a></li>
+    
+    <li><a href="/contact/">Contact</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">3 min read</span>
+    
+
+    <h1 class="article-title">shiny包使用</h1>
+
+    
+    <span class="article-date">2018/09/29</span>
+    
+
+    <div class="article-content">
+      
+
+<p>#shiny包的使用
+<code>shiny</code>作为Rstudio中一个非常重要的包，对于构建交互式的网页非常方便。一般由<code>shiny</code>构筑的网页，由两个文件构成:<code>ui.R</code>和<code>server.R</code>，下面分别对两者的组件进行介绍。
+<strong>在运行程序的时候，需要将<code>ui.R</code>和<code>server.R</code>放入同一个文件夹之中</strong></p>
+
+<h2 id="ui里面的一些组件">ui里面的一些组件</h2>
+
+<h3 id="ui输入">ui输入</h3>
+
+<p>####<code>ui.R</code>一般的框架</p>
+
+<pre><code>library(shiny)
+shinyUI(fluidPage(
+    # 标题
+    titlePanel(&quot;title name&quot;),
+    # 边栏
+    sidebarPanel(
+    #选择块
+        selectInput(&quot;dataset&quot;,&quot;choose a dataset&quot;,choices=c(&quot;A&quot;,&quot;B&quot;))
+    )
+
+    #主栏
+    mainPanel()
+))
+</code></pre>
+
+<h4 id="selectinput"><code>selectInput</code></h4>
+
+<p>selectInput提供下拉菜单的选择，输入格式：</p>
+
+<p><code>selectInput(&quot;data&quot;,&quot;choose&quot;,choices=c(&quot;A&quot;,&quot;B&quot;))</code></p>
+
+<p><code>data</code>是用于储存变量的名称（可以在<code>server.R</code>中以<code>input$data</code>调用），<code>choose</code>是输入说明，<code>choices</code>给出下拉变量的选择</p>
+
+<h4 id="numericinput"><code>numericInput</code></h4>
+
+<p>顾名思义，numericInput是用来输入数值类型数据，其输入格式：
+<code>numericInput(&quot;num&quot;,&quot;type a number&quot;,10)</code></p>
+
+<p>其中<code>num</code>是用于储存变量的名称（可以再<code>server.R</code>中以<code>input$num</code>调用），<code>type a number</code>是说明信息，<code>10</code>是输入的数据</p>
+
+<h4 id="checkboxinput-勾选组件"><code>checkboxInput</code>勾选组件</h4>
+
+<p>有时候，我们可以选择某些图形是否出现，可以通过勾选是否要这个内容来实现，所以这个输入的变量只会出现<code>TRUE</code>或者<code>FALSE</code>，也就是说这个变量是bool型变量</p>
+
+<pre><code>checkboxInput(&quot;out&quot;,&quot;Output&quot;,FALSE)
+</code></pre>
+
+<p>其中<code>out</code>是用来储存bool型变量，<code>Output</code>是对变量进行的说明，<code>FALSE</code>是取值</p>
+
+<h4 id="checkboxgroupinput-多勾选组件"><code>checkboxGroupInput</code>多勾选组件</h4>
+
+<p>有时候我们需要对内容进行多选，这样就需要多项选择</p>
+
+<pre><code>checkboxGroupInput(&quot;cities&quot;,&quot;choose Cities&quot;,cities)
+</code></pre>
+
+<p>这样子就可以实现多项选择了</p>
+
+<h4 id="sliderinput-定制化滑动条"><code>sliderInput</code>定制化滑动条</h4>
+
+<p>通过滑动滑动条来选择数据，是一件非常酷炫的事情，下面给出一个例子</p>
+
+<pre><code>sliderInput(&quot;integer&quot;,&quot;Integer:&quot;,
+            min=0,max=1000,value=500,step=1)
+</code></pre>
+
+<p>其中<code>integer</code>用来储存变量，<code>Interger:</code>是说明，<code>min</code>代表着滑动条的最小值，<code>max</code>代表着滑动条的最大值，<code>value</code>代表着滑动条初始值，<code>step</code>代表着滑动条的间隔</p>
+
+<p>若需要输入区间范围，可以增加两个变量，例如</p>
+
+<pre><code>sliderInput(&quot;range&quot;,&quot;Range:&quot;,
+        min=0,max=1000,value=c(200,500))
+</code></pre>
+
+<p>其中<code>range</code>用来储存变量，只不过此时的变量变成了一个vector</p>
+
+<h4 id="radiobuttons-选项卡"><code>radioButtons</code>选项卡</h4>
+
+<p>我们常常会给出一些选项来，还是直接举例子：</p>
+
+<pre><code>radioButtons(&quot;dist&quot;,&quot;Distribution type:&quot;,
+    list(&quot;Norm&quot;=&quot;norm&quot;,
+            &quot;Uniform&quot;=&quot;unif&quot;,
+            &quot;Log-normal&quot;=&quot;lnorm&quot;,
+            &quot;Exponential&quot;=&quot;exp&quot;
+        )
+),
+br(),
+</code></pre>
+
+<p>其中<code>dist</code>依旧是用于储存变量，<code>Distribution</code>依旧是对变量的说明，而<code>list</code>中，左端代表着展现出来选项，等号右边是选项对应的值，当然在<code>server.R</code>中调用也需要用<code>reactive</code>来动态调用</p>
+
+<h4 id="helptext-插件说明"><code>helpText</code>插件说明</h4>
+
+<p>对于某些插件的功能，我们可能需要对其进行说明，最简单的方式就是在插件下方使用<code>helpText</code></p>
+
+<h4 id="submitbutton-提交按钮"><code>submitButton</code>提交按钮</h4>
+
+<p>对于结果展现，我们并不希望其实时进行更新，而是通过我们的提交来实现结果的刷新，直接在底下增加<code>submitButton</code>，使用如下面的：</p>
+
+<p><code>submitButton(&quot;Update View&quot;)</code></p>
+
+<h3 id="界面的选择-tabsetpanel">界面的选择<code>tabsetPanel</code></h3>
+
+<p>有时候，将所有的内容放入一个界面之中，会显得非常杂乱无章，所以为了将内容分开，需要在使用<code>tabsetPanel</code></p>
+
+<pre><code>tabsetPanel(
+    tabPanel(&quot;plot&quot;,plotOutput(&quot;plot&quot;)),
+    tabPanel(&quot;summary&quot;,verbatimTextOutput(&quot;summary&quot;)),
+    tabPanel(&quot;Table&quot;,tableOutput(&quot;table&quot;))
+)
+</code></pre>
+
+<h3 id="ui中的输出">ui中的输出</h3>
+
+<p>由于<code>ui</code>中的输出需要与<code>server</code>中的程序对应，所以这里需要将两个程序中的组件一起写出来</p>
+
+<h4 id="summary格式的输出">summary格式的输出</h4>
+
+<p><code>server.R</code>中需要调用<code>renderPrint</code>：</p>
+
+<pre><code>output$summary&lt;-renderPrint({
+    #内容
+    summary()
+})
+</code></pre>
+
+<p><code>ui.R</code>中需要调用<code>verbatimTextOutput</code>:</p>
+
+<p><code>verbatimTextOutput(&quot;summary&quot;)</code></p>
+
+<h4 id="table格式的输出">Table格式的输出</h4>
+
+<p><code>server.R</code>中需要调用<code>renderTable</code>：</p>
+
+<pre><code>output$view&lt;-renderTable({
+    #内容 data.frame
+
+})
+</code></pre>
+
+<p><code>ui.R</code>中需要调用<code>tableOutput</code>:</p>
+
+<p><code>tableOutput(&quot;view&quot;)</code></p>
+
+<h4 id="字符串的输出">字符串的输出</h4>
+
+<p><code>server.R</code>则调用<code>renderText</code>来输出</p>
+
+<p><code>ui.R</code>对于字符串的输出，可以用<code>h1</code>、<code>h2</code>和<code>h3</code>等来调节字体的大小，例如：</p>
+
+<p><code>h3(textOutput(&quot;caption&quot;))</code></p>
+
+<h4 id="图片输出">图片输出</h4>
+
+<p><code>server.R</code>则调用<code>renderPlot</code>来输出</p>
+
+<p><code>ui.R</code>对于图片输出，使用<code>plotOutput</code>即可</p>
+
+<p><code>plotOutput(&quot;graph&quot;)</code></p>
+
+<h2 id="server里面的一些组件">server里面的一些组件</h2>
+
+<h4 id="server-r-一般框架"><code>server.R</code>一般框架</h4>
+
+<pre><code>library(shiny)
+shinyServer(function(input,output){
+    #内容
+})
+</code></pre>
+
+<h4 id="动态输入-reactive">动态输入<code>reactive</code></h4>
+
+<p>在<code>ui.R</code>中传递过来的参数，只是一个字符串，如何获取将这个字符串所代表的数据集，我们需要用到<code>reactive</code>函数：</p>
+
+<pre><code>datasetInput&lt;-reactive({
+    switch(input$dataset,
+            &quot;rock&quot; = rock,
+            &quot;pressure&quot; = pressure,
+            &quot;cars&quot; = cars
+    )
+})
+</code></pre>
+
+<p>其中<code>input$dataset</code>代表着从<code>ui.R</code>中传递过来的参数，但是它仅仅只是一个字符串，所以需要用<code>switch</code>函数将数据转化对应的数据集，之后调用的时候，使用<code>datasetInput()</code>即可</p>
+
+<h2 id="程序调试">程序调试</h2>
+
+<p>代码在某个地方无条件地停止执行：</p>
+
+<pre><code>browser()
+</code></pre>
+
+<p>在特定的条件下停止执行代码：</p>
+
+<pre><code># Stop execution when the user selects &quot;am&quot;
+browser(expr = identical(input$variable, &quot;am&quot;))
+</code></pre>
+
+<p>设置R的<code>error</code>选项，使得当错误发生的时候，自动进入调试浏览器：</p>
+
+<pre><code># Immediately enter the browser when an error occurs
+options(error = browser)
+</code></pre>
+
+<p>使用<code>recover</code>函数为错误处理器</p>
+
+<pre><code># Call the recover function when an error occurs
+options(error = recover)
+</code></pre>
+
+<h2 id="文件相关">文件相关</h2>
+
+<h4 id="上传文件">上传文件</h4>
+
+<p>一般情况下，shiny上传的每个文件最大不超过5MB，可以通过修改<code>shiny.maxRequestSize</code>，在<code>server.R</code>中增加以下命令： <code>options(shiny.maxRequestSize=30*1024^2)</code>即可将文件大小限制提高到30MB</p>
+
+<p>在<code>ui.R</code>中需要用<code>fileInput</code>来调用文件</p>
+
+<pre><code>fileInput('file1','choose CSV File',
+        accept=c('text/csv','.csv'))
+tags$hr()
+</code></pre>
+
+<p>其中<code>file1</code>用来储存文件，<code>choose CSV File</code>是对输入的说明，<code>accept</code>是对于文件类型的选择</p>
+
+<p>在<code>server.R</code>中需要通过以下代码进行调用：</p>
+
+<pre><code>inFile&lt;-input$file1
+if(is.null(inFile))
+    return(NULL)
+
+read.csv(inFile$datapath)
+</code></pre>
+
+<p>可以看出其调用使用的文件的路径，并不是真的把文件储存在变量之中</p>
+
+<h4 id="下载文件">下载文件</h4>
+
+<p>有时候会有上传文件的需求，我们查看的数据需要下载</p>
+
+<p>在<code>ui.R</code>中需要用到<code>downloadButton</code>函数来下载需要的数据</p>
+
+<pre><code>downloadButton('downloadData','Download')
+</code></pre>
+
+<p>对上述的表达式进行说明，其中<code>downloadData</code>代表着储存数据的变量，<code>Download</code>是下载按钮上的说明</p>
+
+<p>在<code>server.R</code>中需要将数据写入，需要用到<code>downloadHandler</code></p>
+
+<pre><code>output$downloadData &lt;- downloadHandler(
+    filename=function(){
+        paste(input$dataset,'.csv',sep='')
+    }
+    content = function(file){
+        write.csv(datasetInput(),file)
+    }
+)
+</code></pre>
+
+<p>主要需要定义，文件的的名字<code>filename</code>，文件的内容<code>content</code></p>
+
+<h3 id="动态网页的实现">动态网页的实现</h3>
+
+<h4 id="conditionalpanel-条件刷新"><code>conditionalPanel</code>条件刷新</h4>
+
+<p>当动态输入的变量来自于<code>input</code>变量</p>
+
+<pre><code>checkboxInput(&quot;smooth&quot;,&quot;Smooth&quot;),
+conditionalPanel(
+    condition = &quot;input.smooth == true&quot;
+    selectInput(&quot;smoothMethod&quot;,&quot;Method&quot;,
+        list(&quot;lm&quot;,&quot;glm&quot;,&quot;gam&quot;,&quot;loess&quot;,&quot;rlm&quot;))
+)
+</code></pre>
+
+<p>根据你是否选择<code>smooth</code>来判断是否出现下面的内容，一旦勾选了smooth，下面就会出现让你选择smooth的方法</p>
+
+<p>如果动态输入的变量来自于<code>output</code>变量</p>
+
+<p>在<code>ui.R</code>中，如下面的内容：</p>
+
+<pre><code># Partial example
+selectInput(&quot;dataset&quot;, &quot;Dataset&quot;,   c(&quot;diamonds&quot;, &quot;rock&quot;, &quot;pressure&quot;, &quot;cars&quot;)),
+conditionalPanel(
+condition = &quot;output.nrows&quot;, 
+checkboxInput(&quot;headonly&quot;, &quot;Only use first 1000 rows&quot;))
+</code></pre>
+
+<p>在<code>server.R</code>，如下内容：</p>
+
+<pre><code># Partial example
+datasetInput &lt;- reactive({
+switch(input$dataset,
+      &quot;rock&quot; = rock,
+      &quot;pressure&quot; = pressure,
+      &quot;cars&quot; = cars)
+})
+
+output$nrows &lt;- reactive({
+    nrow(datasetInput())
+})
+</code></pre>
+
+<p>在<code>server.R</code>中需要将输出的变量设置为动态的，也就是说用<code>reactive</code>函数对其进行封装</p>
+
+<h4 id="动态刷新-renderui">动态刷新<code>renderUI</code></h4>
+
+<p><code>renderUI</code>使用与<code>renderTable</code>,<code>renderPrint</code>的使用方法差不多，在<code>server.R</code>中使用<code>renderUI</code>，而在<code>ui.R</code>中使用<code>uiOutput</code>，对<code>server.R</code>计算结果进行展示，下面编写代码，进行说明：</p>
+
+<p>在<code>ui.R</code>中编辑如下代码：</p>
+
+<pre><code>library(shiny)
+
+shinyUI(fluidPage(
+headerPanel(&quot;Test&quot;),
+
+sidebarPanel(
+# Partial example
+numericInput(&quot;lat&quot;, &quot;Latitude&quot;,10),
+numericInput(&quot;long&quot;, &quot;Longitude&quot;,10),
+uiOutput(&quot;cityControls&quot;))
+))
+</code></pre>
+
+<p>在<code>server.R</code>中编辑如下代码：</p>
+
+<pre><code>library(shiny)
+shinyServer(function(input,output){
+# Partial example
+output$cityControls &lt;- renderUI({
+cities &lt;- c(input$lat:input$long)
+checkboxGroupInput(&quot;cities&quot;, &quot;Choose Cities&quot;, cities)
+})
+})
+</code></pre>
+
+<p>上面代码对于结果呈现已经说得很清楚了，调试一下代码就可以了</p>
+
+<h4 id="javascript增加动态">javascript增加动态</h4>
+
+<p>需要使用组件<code>Shiny.unbindAll()</code>和<code>Shiny.bindAll()</code></p>
+
+<h2 id="shiny高级使用技巧">shiny高级使用技巧</h2>
+
+<h4 id="对于-global-r-和局部的理解">对于<code>global.R</code>和局部的理解</h4>
+
+<p>如果没有设置全局变量的话，当用户每一次对<code>ui.R</code>和<code>server.R</code>访问时，都会重新加载变量，重新生成网页，对于全局变量，最好的方式是在<code>global.R</code>中设置，这样子并不需要用户每一访问，都重新加载，既占用内存，又消耗了时间</p>
+
+<h4 id="对于非全局代码的调用">对于非全局代码的调用</h4>
+
+<pre><code>source('yourcode.R',local=TRUE)
+</code></pre>
+
+<h2 id="shiny-server设置">shiny server设置</h2>
+
+<p>使用<code>shiny server</code>的好处</p>
+
+<ul>
+<li>能够运行多个<code>shiny APP</code>，每一个都有其自己的<code>URL</code></li>
+<li>支持浏览器（浏览器不支持<code>WebSocket</code>）</li>
+<li>系统使用着能够开发和管理自己的shiny application</li>
+<li>自动结束进程，当下一个访问者需要访问地址时</li>
+</ul>
+
+<p>详细的<code>shiny-server</code>教程参见<a href="http://docs.rstudio.com/shiny-server/">shiny-server</a></p>
+
+<h3 id="安装配置-shiny-server-http-docs-rstudio-com-shiny-server-configuration-settings">安装配置(<a href="http://docs.rstudio.com/shiny-server/#configuration-settings">shiny server</a>)</h3>
+
+<p>系统: <code>centos 7.0</code></p>
+
+<p>安装<code>R</code>命令： <code>sudo yum install R</code></p>
+
+<p>安装<code>shiny package</code>：``</p>
+
+<p>安装<code>shiny server</code>：通过<code>wget</code>来下载安装文件：</p>
+
+<pre><code>wget https://download3.rstudio.org/centos5.9/x86_64/shiny-server-1.4.2.786-rh5-x86_64.rpm
+</code></pre>
+
+<p>然后用一下命令直接安装：</p>
+
+<pre><code>sudo yum install --nogpgcheck shiny-server-1.4.2.786-rh5-x86_64.rpm
+</code></pre>
+
+<h3 id="启动-shiny-server">启动<code>shiny server</code></h3>
+
+<p>启动<code>shiny server</code>：<code>sudo systemctl start shiny-server</code></p>
+
+<p>结束<code>shiny server</code>：<code>sudo systemctl stop shiny-server</code></p>
+
+<p>观察<code>shiny server</code>的状态：<code>sudo systemtcl status shiny-server</code></p>
+
+<p>设置<code>shiny server</code>自动运行\不自动运行：<code>sudo systemctl enable\disable shiny-server</code></p>
+
+<h3 id="server配置">server配置</h3>
+
+<p>命令打开<code>vi /etc/shiny-server/shiny-server.conf</code></p>
+
+<p><code>server</code>默认为<code>HTTP server</code>，监听的接口（<code>port/IP</code>）通过下面的定义：</p>
+
+<pre><code>server{
+    listen 80;
+}
+</code></pre>
+
+<p>通过定义虚拟接口，可以隐藏监听接口</p>
+
+<pre><code>server{
+    listen 80;
+    server_name server1.com;
+}
+</code></pre>
+
+<h3 id="需要赋予shiny用户root权限">需要赋予shiny用户root权限</h3>
+
+<ul>
+<li>为<code>shiny</code>用户创建密码:<code>passwd shiny</code></li>
+<li>修改<code>/etc/sudoers</code>文件，向其中添加下面的指令<code>shiny ALL=(ALL) ALL</code>，即可修改用户权限，从<code>root</code>用户进入<code>shiny</code>用户，可以用下面的指令<code>su shiny</code></li>
+</ul>
+
+<h3 id="运行自己的服务">运行自己的服务</h3>
+
+<p>在运行了其中默认的配置</p>
+
+<p><code>sudo /opt/shiny-server/bin/deploy-example user-dirs</code></p>
+
+<p>运行下面的命令</p>
+
+<p><code>mkdir ~/ShinyApps</code></p>
+
+<p>拷贝文件夹指令：<code>scp/cp -r</code></p>
+
+<p>只需要将文件复制到目录下<code>~/ShinyApps</code>，然后通过下面的地址来访问<code>shiny</code>形成的网页</p>
+
+<p><code>http://&lt;server-address&gt;:3838/&lt;your_username&gt;/yourfile</code></p>
+
+<h3 id="server小提示">server小提示</h3>
+
+<ul>
+<li><p><code>shiny</code>包可能会无法安装上去，所以在命令窗口输入<code>R</code>，然后输入下面指令：<code>install.packages('shiny', repos='http://cran.rstudio.com/')
+library(shiny)</code></p></li>
+
+<li><p><code>shiny</code>访问的的时候，需要将服务器的端口打开，不然无法进行访问，如果你在配置文件<code>/etc/shiny-server/shiny-server.conf</code>文件中写的监听端口为<code>3838</code>,服务器端口开放命令：</p>
+
+<pre><code>iptables -I INPUT -p tcp --dport 3838 -j ACCEPT
+iptables -I INPUT -p gre -j ACCEPT
+</code></pre></li>
+
+<li><p><code>plotly</code>包安装问题，可能会碰到系统的<code>curl</code>包无法安装，而<code>curl</code>无法安装的原因在于系统的<code>libcurl</code>没有安装，需要输入一下命令：</p>
+
+<pre><code>yum -y install libcurl
+yum install curl curl-level
+</code></pre></li>
+</ul>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+  </body>
+</html>
+

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.38.2" />
+
+
+<title>owncloud配置问题 - Blog of Feifan Cheng</title>
+<meta property="og:title" content="owncloud配置问题 - Blog of Feifan Cheng">
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.11.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.jpg"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="https://github.com/chengfeifan/myBlogdown">GitHub</a></li>
+    
+    <li><a href="https://weibo.com/3012495997/">微博</a></li>
+    
+    <li><a href="/contact/">Contact</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">1 min read</span>
+    
+
+    <h1 class="article-title">owncloud配置问题</h1>
+
+    
+    <span class="article-date">2018/09/29</span>
+    
+
+    <div class="article-content">
+      
+
+<h2 id="owncloud安装的相关问题">owncloud安装的相关问题</h2>
+
+<h3 id="安装命令">安装命令：</h3>
+
+<pre><code>sudo rpm --import https://download.owncloud.org/download/repositories/stable/CentOS_7/repodata/repomd.xml.key；
+sudo curl -L https://download.owncloud.org/download/repositories/stable/CentOS_7/ce:stable.repo -o /etc/yum.repos.d/ownCloud.repo；
+sudo yum clean expire-cache；
+sudo yum install owncloud；
+</code></pre>
+
+<h3 id="数据库安装">数据库安装：</h3>
+
+<h3 id="安装出现的问题">安装出现的问题：</h3>
+
+<p>1.无法启动mysql</p>
+
+<p><code>ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/var/lib/mysql/mysql.sock' (2)</code></p>
+
+<p>解决方法：
+<code>sudo yum install mariadb-server</code>
+<code>sudo systemctl start mariadb</code></p>
+
+<ol>
+<li>开放端口</li>
+</ol>
+
+<p><code>firewall-cmd --permanent --zone=public --add-port=8080/tcp</code>
+<code>iptables -I INPUT -p tcp --dport 80 -j ACCEPT</code></p>
+
+<h3 id="维护出现的问题">维护出现的问题</h3>
+
+<p>维护时候发现owncloud进入了维护模式，这个时候我们需要关掉这个模式：</p>
+
+<p><code>sudo -u apache php occ maintenance:mode --off</code></p>
+
+<p>手动上传文件之后，如何更新<code>owncloud</code>数据库</p>
+
+<pre><code>find / -name &quot;occ&quot; 2&gt;/dev/null
+sudo -u www-data php occ files:scan --all
+</code></pre>
+
+<h3 id="更改目录">更改目录</h3>
+
+<p>有时候因为原来目录放不下了，需要更改<code>owncloud</code>的根目录</p>
+
+<ol>
+<li>关闭服务</li>
+<li>更改<code>php</code>的配置文件，在目录<code>/var/www/owncloud/data/config.php</code>下，更改文件<code>'datadirectory' =&gt; 'your directory'</code></li>
+<li>移动原始文件夹文件，<code>mv /var/www/owncloud/data 'your directory'</code></li>
+<li>更改文件权限，<code>chown -R www-data:www-data /media/usbdisk/ocdata
+</code></li>
+</ol>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+
+    
+  </body>
+</html>
+

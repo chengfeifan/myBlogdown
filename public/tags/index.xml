@@ -48,6 +48,15 @@
     </item>
     
     <item>
+      <title>Hadoop</title>
+      <link>/tags/hadoop/</link>
+      <pubDate>Sat, 29 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/hadoop/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Holiday</title>
       <link>/tags/holiday/</link>
       <pubDate>Tue, 25 Sep 2018 00:00:00 +0000</pubDate>
@@ -71,6 +80,15 @@
       <pubDate>Mon, 17 Sep 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/meeting/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Owncloud</title>
+      <link>/tags/owncloud/</link>
+      <pubDate>Sat, 29 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/owncloud/</guid>
       <description></description>
     </item>
     
@@ -107,6 +125,33 @@
       <pubDate>Sat, 29 Sep 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/rstudio-server/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Samba</title>
+      <link>/tags/samba/</link>
+      <pubDate>Sat, 29 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/samba/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Shiny</title>
+      <link>/tags/shiny/</link>
+      <pubDate>Sat, 29 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/shiny/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Spark</title>
+      <link>/tags/spark/</link>
+      <pubDate>Sat, 29 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/spark/</guid>
       <description></description>
     </item>
     

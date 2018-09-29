@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.38.2" />
+
+
+<title>Hadoop搭建 - Blog of Feifan Cheng</title>
+<meta property="og:title" content="Hadoop搭建 - Blog of Feifan Cheng">
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.11.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.jpg"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="https://github.com/chengfeifan/myBlogdown">GitHub</a></li>
+    
+    <li><a href="https://weibo.com/3012495997/">微博</a></li>
+    
+    <li><a href="/contact/">Contact</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">2 min read</span>
+    
+
+    <h1 class="article-title">Hadoop搭建</h1>
+
+    
+    <span class="article-date">2018/09/29</span>
+    
+
+    <div class="article-content">
+      
+
+<h1 id="小规模spark集群搭建">小规模Spark集群搭建</h1>
+
+<blockquote>
+<p>此方法只适用于小规模机群搭建，对于大规模集群搭建，请学习脚本配置。本次搭建的服务器有六台，每台服务器的处理器为 <strong>Intel&reg; Core&trade; i5-3450 CPU @ 3.10GHz</strong>，内存为8GB。服务器的静态IP为<code>166.111.17.69</code>，搭建底层系统为centos7.0</p>
+</blockquote>
+
+<h2 id="centos7-0安装">centos7.0安装</h2>
+
+<ol>
+<li>制作centos7.0 的光驱文件</li>
+<li>安装master服务器时注意需要安装图形界面，因为学校联网需要认证</li>
+<li>安装时，选择其他服务器时，选择安全工具和java平台</li>
+<li>需要设置网络，可以在开始安装时设置网络。网络配置文件在目录<code>/etc/sysconfig/net-work-scripts/</code>下，将DNS设置为<code>166.111.8.29</code>和<code>166.111.8.28</code>（学校DNS服务器），以及将<code>ONBOOT</code>设置为<code>on</code></li>
+<li>网线连接，即可以进行配置</li>
+</ol>
+
+<h2 id="hadoop2-6-0搭建">Hadoop2.6.0搭建</h2>
+
+<h3 id="ssh登录免密码设置">ssh登录免密码设置</h3>
+
+<p>以<code>root</code>的身份登录服务器，修改服务器的名称</p>
+
+<pre><code>nano /etc/hosts
+</code></pre>
+
+<p>修改配置文件</p>
+
+<pre><code>166.111.17.69  master
+166.111.17.121 node1
+166.111.17.122 node2
+166.111.17.123 node3
+166.111.17.124 node4
+166.111.17.125 node5
+</code></pre>
+
+<p>在每一台服务器上添加名为hadoop用户</p>
+
+<pre><code>useradd hadoop
+passwd hadoop
+</code></pre>
+
+<p>在master服务器上产生密钥对，将公共秘钥分配给其他服务器</p>
+
+<pre><code>su hadoop
+ssh-keygen -t rsa
+ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop@master
+ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop@node1
+ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop@node2
+ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop@node3
+ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop@node4
+ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop@node5
+</code></pre>
+
+<p>使认证文件不能被修改</p>
+
+<pre><code>chmod 0600 ~/.ssh/authorized_keys
+</code></pre>
+
+<h3 id="java安装">JAVA安装</h3>
+
+<p>下载所需要的java版本到文件夹<code>/usr</code>下</p>
+
+<pre><code>cd /usr
+wget http://javadl.sun.com/webapps/download/AutoDL?BundleId=114681
+</code></pre>
+
+<p>解压安装java文件，并转移到jdk文件夹下面</p>
+
+<pre><code>tar -zxf jdk-8u65-linux-x64.tar.gz
+mv jdk1.8.0_65 jdk
+</code></pre>
+
+<p>下面将文件夹拷贝到其他节点</p>
+
+<pre><code>scp -r jdk node1:/usr
+scp -r jdk node2:/usr
+scp -r jdk node3:/usr
+scp -r jdk node4:/usr
+scp -r jdk node5:/usr
+</code></pre>
+
+<p>在每一个节点上更改其默认的java路径</p>
+
+<pre><code>alternatives -- install /usr/bin/java java /usr/jdk/bin/java 2
+alternatives --config java #select appropriate program (/usr/jdk/bin/java)
+alternatives  --install /usr/bin/jar jar /usr/jdk/bin/jar 2
+alternatives --install /usr/bin/javac javac /usr/jdk/bin/javac 2
+alternatives --set jar /usr/jdk/bin/jar
+alternatives --set javac /usr/jdk/bin/javac
+</code></pre>
+
+<p>修改环境变量</p>
+
+<pre><code>nano /etc/bashrc
+</code></pre>
+
+<p>向其中文件加入下面的内容</p>
+
+<pre><code>export JAVA_HOME=/usr/jdk
+export JRE_HOME=/usr/jdk/jre
+export PATH=$PATH:/usr/jdk/bin:/usr/jdk/jre/bin
+</code></pre>
+
+<p>也可以添加下面的内容，使文件更容易阅读</p>
+
+<pre><code>alias ll='ls -l --color'
+alias cp='cp -i'
+alias mv='mv -i'
+alias rm='rm -i'
+</code></pre>
+
+<p>修改好文件之后，重新启动服务</p>
+
+<pre><code>source /etc/bashrc
+echo $JAVA_HOME
+</code></pre>
+
+<p>这样子java环境也就配置好了</p>
+
+<h3 id="服务器时间同步">服务器时间同步</h3>
+
+<p>很多情况下，服务器的时间并不统一，这样子会造成很多问题，例如文件同步时无法分清哪一台服务器上的文件是最新的。因此，有必要对服务器的时间进行同步，通步使用的是ntp服务。首先安装ntp服务</p>
+
+<pre><code>yum -y install ntp
+</code></pre>
+
+<p>启动ntp服务</p>
+
+<pre><code>ntpdate pool.ntp.org
+</code></pre>
+
+<p>修改配置文件</p>
+
+<pre><code>vi /etc/ntp.conf
+</code></pre>
+
+<p>往文件中添加下面的内容</p>
+
+<pre><code>#please consider joining the pool
+server internalntpserver1 iburst
+server internalntpserver2 iburst
+server pool.ntp.org iburst
+</code></pre>
+
+<p>重新启动服务</p>
+
+<pre><code>chkconfig ntpd on
+service ntpd start
+</code></pre>
+
+<p>安装过程可能导致时区的不一致，下面将时区统一</p>
+
+<pre><code>timedatectl     #查看系统时间设置
+timedatectl list-timezones    #查看所有可选时区
+timedatectl set-timezones Asia/Shanghai   #统一设置成北京时间
+</code></pre>
+
+<h3 id="hadoop2-6-0安装">Hadoop2.6.0安装</h3>
+
+<p>从官网上下载到<code>/usr</code>下，运行下面的命令</p>
+
+<pre><code>wget http://www.eu.apache.org/dist/hadoop/common/hadoop-2.6.0/hadoop-2.6.0.tar.gz
+</code></pre>
+
+<p>解压文件，并把文件转移到文件夹hadoop下</p>
+
+<pre><code>tar -zxf hadoop-2.6.0.tar.gz
+rm hadoop-2.6.0.tar.gz
+mv hadoop-2.6.0 hadoop
+</code></pre>
+
+<p>修改文件<code>/usr/hadoop/etc/hadoop/core-site.xml</code>，设置Namenode的URI</p>
+
+<pre><code>&lt;configuration&gt;
+&lt;property&gt;
+    &lt;name&gt;fs.defaultFS&lt;/name&gt;
+    &lt;value&gt;hdfs://master:9000/&lt;/value&gt;
+&lt;/property&gt;
+&lt;/configuration&gt;
+</code></pre>
+
+<p>修改文件<code>usr/hadoop/etc/hadoop/hdfs-site.xml</code>，设置DataNondes</p>
+
+<pre><code>&lt;configuration&gt;
+&lt;property&gt;
+    &lt;name&gt;dfs.replication&lt;/name&gt;
+    &lt;value&gt;3&lt;/value&gt;
+&lt;/property&gt;
+&lt;property&gt;
+    &lt;name&gt;dfs.permissions&lt;/name&gt;
+    &lt;value&gt;false&lt;/value&gt;
+&lt;/property&gt;
+&lt;property&gt;
+    &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;
+    &lt;value&gt;/home/hadoop/datanode&lt;/value&gt;
+&lt;/property&gt;
+&lt;/configuration&gt;
+</code></pre>
+
+<p>修改文件<code>/usr/hadoop/etc/hadoop/yarn-site.xml</code>，设置资源管理者和节点管理者</p>
+
+<pre><code>&lt;configuration&gt;
+&lt;property&gt;
+    &lt;name&gt;yarn.resourcemanager.hostname&lt;/name&gt;
+    &lt;value&gt;master&lt;/value&gt;
+&lt;/property&gt;
+&lt;property&gt;
+    &lt;name&gt;yarn.nodemanager.hostname&lt;/name&gt;
+    &lt;value&gt;hmaster&lt;/value&gt; &lt;!-- or node1, node2, node3, node4, node5 --&gt;
+&lt;/property&gt;
+&lt;property&gt;
+    &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;
+    &lt;value&gt;mapreduce_shuffle&lt;/value&gt;
+&lt;/property&gt;
+&lt;/configuration&gt;
+</code></pre>
+
+<p>在所有节点上修改<code>/home/hadoop/.bashrc</code></p>
+
+<pre><code>vi /home/hadoop/.bashrc
+</code></pre>
+
+<p>向文件中添加西面的内容</p>
+
+<pre><code>export HADOOP_PREFIX=/usr/hadoop
+export HADOOP_HOME=$HADOOP_PREFIX
+export HADOOP_COMMON_HOME=$HADOOP_PREFIX
+export HADOOP_CONF_DIR=$HADOOP_PREFIX/etc/hadoop
+export HADOOP_HDFS_HOME=$HADOOP_PREFIX
+export HADOOP_MAPRED_HOME=$HADOOP_PREFIX
+export HADOOP_YARN_HOME=$HADOOP_PREFIX
+export PATH=$PATH:$HADOOP_PREFIX/sbin:$HADOOP_PREFIX/bin
+</code></pre>
+
+<p>将hadoop文件拷贝到各个节点<code>/usr</code>目录下</p>
+
+<pre><code>scp -r hadoop node1:/usr
+scp -r hadoop node2:/usr
+scp -r hadoop node3:/usr
+scp -r hadoop node4:/usr
+scp -r hadoop node5:/usr
+</code></pre>
+
+<p>将hadoop文件夹的权限赋予hadoop用户，以及创建datanode文件夹</p>
+
+<pre><code>chown hadoop /usr/hadoop/ -R
+chgrp hadoop /usr/hadoop/ -R
+mkdir /home/hadoop/datanode
+chown hadoop /home/hadoop/datanode/
+chgrp hadoop /home/hadoop/datanode/  
+</code></pre>
+
+<p>配置master服务器上的文件<code>/usr/hadoop/etc/hadoop/hdfs-site.xml</code></p>
+
+<pre><code>&lt;property&gt;
+    &lt;name&gt;dfs.namenode.data.dir&lt;/name&gt;
+    &lt;value&gt;/home/hadoop/namenode&lt;/value&gt;
+&lt;/property&gt;
+</code></pre>
+
+<p>配置master服务器上的文件<code>/usr/hadoop/etc/hadoop/mapred-site.xml</code></p>
+
+<pre><code>&lt;configuration&gt;
+&lt;property&gt;
+    &lt;name&gt;mapreduce.framework.name&lt;/name&gt;
+    &lt;value&gt;yarn&lt;/value&gt; &lt;!-- and not local (!) --&gt;
+&lt;/property&gt;
+&lt;/configuration&gt;
+</code></pre>
+
+<p>配置master服务器上的文件<code>/usr/hadoop/etc/hadoop/slaves</code></p>
+
+<pre><code>master
+node1
+node2
+node3
+node4
+node5
+</code></pre>
+
+<p>配置完成之后，输入下面的命令</p>
+
+<pre><code>su hadoop
+hdfs namenode -format
+sh /usr/hadoop/sbin/start-all.sh
+</code></pre>
+
+<p>输入<code>jps</code>，即可查看状态</p>
+
+<h3 id="scala安装">Scala安装</h3>
+
+<p>从官网上下载安装文件</p>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+  </body>
+</html>
+

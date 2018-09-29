@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.38.2" />
+
+
+<title>samba配置问题 - Blog of Feifan Cheng</title>
+<meta property="og:title" content="samba配置问题 - Blog of Feifan Cheng">
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.11.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.jpg"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="https://github.com/chengfeifan/myBlogdown">GitHub</a></li>
+    
+    <li><a href="https://weibo.com/3012495997/">微博</a></li>
+    
+    <li><a href="/contact/">Contact</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">3 min read</span>
+    
+
+    <h1 class="article-title">samba配置问题</h1>
+
+    
+    <span class="article-date">2018/09/29</span>
+    
+
+    <div class="article-content">
+      
+
+<h1 id="samba服务器配置">Samba服务器配置</h1>
+
+<blockquote>
+<p>为了解决团队文件共享问题，决定搭建一个<code>samba</code>服务器来解决所有问题，下面就将<code>samba</code>服务搭建过程详细地写下来</p>
+</blockquote>
+
+<h2 id="samba服务安装">Samba服务安装</h2>
+
+<p>在<code>centos</code>系统中直接输入：<code>yum install samba</code></p>
+
+<h2 id="samba配置">Samba配置</h2>
+
+<p><code>Samba</code>服务的配置文件在<code>\etc\samba\smb.conf</code></p>
+
+<h3 id="配置实例">配置实例</h3>
+
+<ul>
+<li>添加群组：<code>groupadd admin</code></li>
+<li>添加用户：<code>useradd -g admin chengff</code></li>
+<li>添加<code>samba</code>用户：<code>smbpasswd -a chengff</code></li>
+
+<li><p>创建共享文件夹：</p>
+
+<pre><code>mkdir /share/public
+chgrp admin /share/public
+chmod 770 /share/public
+chmod g+s /share/public
+</code></pre></li>
+
+<li><p>修改配置文件</p>
+
+<pre><code>[public]
+    comment = Complete Public Folder
+    path = /share/public
+    browseable = yes
+    guest ok = yes
+    writable = yes
+    directory mask = 0777
+    create mask =0666
+    valid users = @admin
+    write list = @admin
+</code></pre></li>
+
+<li><p>开放端口，我在<code>/home/chengff/openSamba.sh</code>文件中写入了<code>samba</code>服务需要开放的端口</p>
+
+<pre><code>iptables -I INPUT -p tcp --dport 135 -j ACCEPT;
+iptables -I INPUT -p tcp --dport 136 -j ACCEPT;
+iptables -I INPUT -p tcp --dport 137 -j ACCEPT;
+iptables -I INPUT -p tcp --dport 138 -j ACCEPT;
+iptables -I INPUT -p tcp --dport 139 -j ACCEPT;
+iptables -I INPUT -p tcp --dport 445 -j ACCEPT;
+</code></pre></li>
+</ul>
+
+<h3 id="将samba设置为开机启动">将samba设置为开机启动</h3>
+
+<pre><code>    chkconfig smb on
+</code></pre>
+
+<h3 id="创建用户无法登陆服务器">创建用户无法登陆服务器</h3>
+
+<pre><code>useradd -MN %u -s /sbin/nologin 
+</code></pre>
+
+<h3 id="批量添加用户">批量添加用户</h3>
+
+<pre><code>useradd -MN %u -s /sbin/nologin &amp;&amp; echo %p | passwd --stdin %u &amp;&amp; usermod -aG filesgroup %u &amp;&amp; mkdir -p /opt/files/%d &amp;&amp; chown -R %u: /opt/files/%d &amp;&amp; echo -e &quot;%p\n%p&quot; | smbpasswd -a -s %u
+</code></pre>
+
+<p>命令解释：</p>
+
+<pre><code>useradd -MN %u -s /sbin/nologin     添加用户，-MN表示不创建用户家目录和用户基本组，-s /sbin/nologin 表示用户不可登录服务器
+echo %p | passwd --stdin %u       为用户设置密码（其实可以省略）
+usermod -aG filesgroup %u             将用户加入到filegroup组
+mkdir -p /opt/files/%d               在共享目录创建用户文件夹
+chown -R %u: /opt/files/%d           将用户文件夹owner设为用户自己
+echo -e &quot;%p\n%p&quot; | smbpasswd -a -s %u 添加samba用户帐号，smbpasswd -a -s %u 是静默方式添加samba帐号，echo -e &quot;%p\n%p&quot; 是两次输出密码 %p，中间输出回车符 \n
+</code></pre>
+
+<h3 id="配置遇到的问题">配置遇到的问题</h3>
+
+<ol>
+<li><p>当我将上述文件配好之后，发现还是没有办法在<code>windows</code>下面访问，访问的时候，提醒没有访问权限，于是百度了一下，通过下面的方式解决了问题：</p>
+
+<ul>
+<li>将<code>\etc\sysconfig\selinux</code>文件中<code>SELINUX</code>由<code>enforing</code>更改为<code>disabled</code></li>
+<li>终端输入<code>setenforce 0</code></li>
+</ul></li>
+
+<li><p>无法访问自己所在的文件夹，解决方法：</p>
+
+<ul>
+<li>清除windows上samba的缓存数据：<code>net use * /del /y</code><br /></li>
+
+<li><p>发现问题是：</p>
+
+<pre><code>[homes]
+comment = Home Directories
+browseable = no
+writable = yes
+valid users = %S
+； valid users = MYDOMAIN\%S;
+</code></pre></li>
+</ul></li>
+</ol>
+
+<h3 id="其他">其他</h3>
+
+<ul>
+<li>查看<code>samba</code>用户的状态：<code>smbstatus</code></li>
+</ul>
+
+<h3 id="修改-samba-服务的密码配置类型">修改<code>samba</code>服务的密码配置类型</h3>
+
+<p><code>samba</code>服务中默认的密码认证服务为<code>tdbsam</code>格式，需要修改<code>smb.conf</code>的文件：</p>
+
+<pre><code> pam password change = no
+ passdb backend = smbpasswd
+ smb passwd file = /etc/samba/smbpasswd
+</code></pre>
+
+<p>然后重启<code>samba</code>服务：<code>systemctl restart smb</code>，此时就可以在<code>/etc/samba/</code>目录下看到<code>smbpasswd</code>文件，用于储存<code>samba</code>用户的密码</p>
+
+<h3 id="安装-changepassword">安装<code>changepassword</code></h3>
+
+<p><code>./configure --enable-cgidir=/home/chengff/www/samba-changepwd --enable-language=English --enable-smbpasswd=/etc/samba/smbpasswd --disable-squidpasswd --enable-logo=/share/public/log.jpg</code></p>
+
+<h3 id="安装-apache-http-服务">安装<code>APache HTTP</code>服务</h3>
+
+<p>为了能够通过<code>web</code>访问修改密码的文件，需要搭建<code>apache</code>服务器，记得返回目录：</p>
+
+<pre><code># 准备安装环境
+yum -y install gcc* openssl-devel expat-devel openssl openssl-devel libxml2-devel glibc-common gd-devel;
+# 下载源包
+wget http://archive.apache.org/dist/httpd/httpd-2.2.23.tar.gz;
+wget http://archive.apache.org/dist/apr/apr-1.4.6.tar.gz;
+wget http://archive.apache.org/dist/apr/apr-util-1.5.1.tar.gz;
+# 安装 apr
+tar zxvf apr-1.4.6.tar.gz;
+cd apr-1.4.6;
+./configure --prefix=/usr/local/apr; 
+make; 
+make install;
+# 安装 apr-util
+tar zxvf apr-util-1.5.1.tar.gz; 
+cd apr-util-1.5.1;
+./configure --with-apr=/usr/local/apr;
+make;
+make install;
+# 安装apache
+tar zxvf httpd-2.2.23.tar.gz;
+cd httpd-2.2.23;
+./configure --prefix=/usr/local/apache --enable-dav --enable-so --enable-maintainer-mode --with-apr=/usr/local/apr/bin/apr-1-config --with-apr-util=/usr/local/apr/bin/apu-1-config;
+make;
+make install;
+</code></pre>
+
+<p>修改文件：<code>／usr／local／apache／conf／httpd.conf</code>,让<code>httpd</code>支持<code>cgi</code>模块</p>
+
+<ul>
+<li>搜索<code>cgi</code>，然后去掉<code>AddHandler cgi-script .cgi</code>前面的注释<code>#</code></li>
+<li>搜索<code>DocumentRoot</code>，在<code>/usr/local/apache/htdocs</code>类目下找到<code>Options</code>选项，修改为<code>Options Indexes FollowSymLinks ExecCGI</code></li>
+<li>在<code>/usr/local/apache/cgi-bin</code>类目下扎到<code>Options</code>选项，修改为<code>Options ExeCGI</code></li>
+<li>将<code>ServerName</code>修改为：<code>ServerName 127.0.0.1:80</code></li>
+</ul>
+
+<h4 id="测试-cgi-是否配置成功">测试<code>CGI</code>是否配置成功</h4>
+
+<p>转到<code>/usr/local/apache/cgi-bin</code>，运行下面的命令：</p>
+
+<pre><code>cp test-cgi test.cgi
+chmod +x test.cgi
+</code></pre>
+
+<p>通过下面的地址访问<code>your ip\cgi-bin\test.cgi</code></p>
+
+<h4 id="开放端口">开放端口</h4>
+
+<p><code>iptables -I INPUT -p tcp --dport 80 -j ACCEPT</code></p>
+
+<h3 id="配置-changepassword">配置<code>changepassword</code></h3>
+
+<p><code>./configure --enable-cgidir=/usr/local/apache/cgi-bin --enable-language=Chinese --enable-smbpasswd=/etc/samba/smbpasswd --disable-squidpasswd --enable-logo=log.jpg</code></p>
+
+<h3 id="关于-internal-server-error">关于<code>Internal Server Error</code></h3>
+
+<p>配置好一切文件之后，输入<code>166.111.17.126\cgi-bin\changepassword.cgi</code>，可以访问，结果发现访问之后，输入要修改的密码之后，就出现<code>Internal Server Error</code>，仔细查找了一下，发现没有这个问题的描述，但是之后看到一个说明，可能是权限不够的原因，所以在配置文件的之后，需要更改<code>changepassword.cgi</code>的权限，<code>chmod 777 changepassword.cgi</code></p>
+
+<h3 id="启动-usr-local-apache-bin-apachectl-restart">启动<code>/usr/local/apache/bin/apachectl restart</code></h3>
+
+<p>启动<code>/usr/local/apache/bin/apachectl restart</code>，可能会出现无法启动的问题</p>
+
+<pre><code>httpd not running, trying to start
+(98)Address already in use: make_sock: could not bind to address [::]:80
+(98)Address already in use: make_sock: could not bind to address 0.0.0.0:80
+no listening sockets available, shutting down
+Unable to open logs
+</code></pre>
+
+<p>输入下面的指令：</p>
+
+<pre><code>killall -9 httpd
+</code></pre>
+
+<p>杀死已经存在的<code>httpd</code>的进程</p>
+
+<p>重启<code>/usr/local/apache/bin/apachectl restart</code>，还是会报错，<code>httpd not running, trying to start</code>，此时需要<code>/usr/sbin/httpd -k restart</code>，运用下面的指令：</p>
+
+<h3 id="批量添加用户-1">批量添加用户</h3>
+
+<p><code>useradd -N luoya -s /sbin/nologin &amp;&amp; echo luoya | passwd --stdin luoya &amp;&amp; usermod -aG futureComputing luoya &amp;&amp; chown -R luoya: /home/luoya &amp;&amp; echo -e &quot;luoya\nluoya&quot; | smbpasswd -a -s luoya</code></p>
+
+<h3 id="读取文件">读取文件</h3>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+  </body>
+</html>
+

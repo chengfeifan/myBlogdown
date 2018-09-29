@@ -3,7 +3,27 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/2018/09/29/hadoop/</loc>
+    <lastmod>2018-09-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/2018/09/29/rstudio-server/</loc>
+    <lastmod>2018-09-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2018/09/29/owncloud/</loc>
+    <lastmod>2018-09-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2018/09/29/samba/</loc>
+    <lastmod>2018-09-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2018/09/29/shiny/</loc>
     <lastmod>2018-09-29T00:00:00+00:00</lastmod>
   </url>
   
@@ -104,6 +124,18 @@
   </url>
   
   <url>
+    <loc>/tags/hadoop/</loc>
+    <lastmod>2018-09-29T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/hadoop/</loc>
+    <lastmod>2018-09-29T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/holiday/</loc>
     <lastmod>2018-09-25T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -122,8 +154,20 @@
   </url>
   
   <url>
+    <loc>/categories/linux/</loc>
+    <lastmod>2018-09-29T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/meeting/</loc>
     <lastmod>2018-09-17T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/owncloud/</loc>
+    <lastmod>2018-09-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -159,6 +203,24 @@
   
   <url>
     <loc>/tags/rstudio-server/</loc>
+    <lastmod>2018-09-29T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/samba/</loc>
+    <lastmod>2018-09-29T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/shiny/</loc>
+    <lastmod>2018-09-29T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/spark/</loc>
     <lastmod>2018-09-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>

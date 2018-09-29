@@ -150,6 +150,12 @@ yum install R
 <pre><code>yum install R
 </code></pre>
 
+<h4 id="启动指令">启动指令</h4>
+
+<pre><code>iptables -I INPUT -p tcp --dport 8787 -j ACCEPT;
+sudo rstudio-server start;
+</code></pre>
+
     </div>
   </article>
 

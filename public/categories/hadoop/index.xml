@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hadoop on Blog of Feifan Cheng</title>
+    <link>/categories/hadoop/</link>
+    <description>Recent content in Hadoop on Blog of Feifan Cheng</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 29 Sep 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/hadoop/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Hadoop搭建</title>
+      <link>/2018/09/29/hadoop/</link>
+      <pubDate>Sat, 29 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/09/29/hadoop/</guid>
+      <description>小规模Spark集群搭建  此方法只适用于小规模机群搭建，对于大规模集群搭建，请学习脚本配置。本次搭建的服务器有六台，每台服务器的处理器为 Intel&amp;reg; Core&amp;trade; i5-3450 CPU @ 3.10GHz，内存为8GB。服务器的静态IP为166.111.17.69，搭建底层系统为centos7.0
+ centos7.0安装  制作centos7.0 的光驱文件 安装master服务器时注意需要安装图形界面，因为学校联网需要认证 安装时，选择其他服务器时，选择安全工具和java平台 需要设置网络，可以在开始安装时设置网络。网络配置文件在目录/etc/sysconfig/net-work-scripts/下，将DNS设置为166.111.8.29和166.111.8.28（学校DNS服务器），以及将ONBOOT设置为on 网线连接，即可以进行配置  Hadoop2.6.0搭建 ssh登录免密码设置 以root的身份登录服务器，修改服务器的名称
+nano /etc/hosts  修改配置文件
+166.111.17.69 master 166.111.17.121 node1 166.111.17.122 node2 166.111.17.123 node3 166.111.17.124 node4 166.111.17.125 node5  在每一台服务器上添加名为hadoop用户
+useradd hadoop passwd hadoop  在master服务器上产生密钥对，将公共秘钥分配给其他服务器
+su hadoop ssh-keygen -t rsa ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop@master ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop@node1 ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop@node2 ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop@node3 ssh-copy-id -i ~/.</description>
+    </item>
+    
+  </channel>
+</rss>
