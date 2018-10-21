@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Forum on Blog of Feifan Cheng</title>
+    <link>/tags/forum/</link>
+    <description>Recent content in Forum on Blog of Feifan Cheng</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 18 Oct 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/forum/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>赵也平的报告</title>
+      <link>/2018/10/18/%E8%B5%B5%E4%B9%9F%E5%B9%B3%E7%9A%84%E6%8A%A5%E5%91%8A/</link>
+      <pubDate>Thu, 18 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/10/18/%E8%B5%B5%E4%B9%9F%E5%B9%B3%E7%9A%84%E6%8A%A5%E5%91%8A/</guid>
+      <description>药物开发流程 ![流程图]()
+药物应该具有特性：
+ 新颖性，选择性 ADME 具有商业价值 副作用小（不要对心脏，内脏造成影响）  </description>
+    </item>
+    
+  </channel>
+</rss>

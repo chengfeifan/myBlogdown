@@ -6,10 +6,55 @@
     <description>Recent content in Posts on Blog of Feifan Cheng</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 29 Sep 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 21 Oct 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>jupyter notebook的目录</title>
+      <link>/2018/10/21/jupyter-notebook/</link>
+      <pubDate>Sun, 21 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/10/21/jupyter-notebook/</guid>
+      <description>问题 最近一直用 jupyter notebook 写代码，因为要跑的代码比较长，所以导致整个页面都比较长，导致找到之前写的代码比较困难，这个时候就想着能不能有个目录来显示整个页面的内容，结果发现其实是可以的，就是用的 Jupyter Nbextensions Configurator，里面有许多扩展功能。
+安装扩展 对于使用 Anaconda 的用户，直接使用下面的指令
+conda install -c conda-forge jupyter_nbextensions_configurator  对于使用 pip 的用户，需要用到下面两个指令
+pip install jupyter_nbextensions_configurator  针对特定用户
+jupyter nbextensions_configurator enable --user  访问设置 访问 http://localhost:8888/tree，你就可以看到nbextensions, 看到Table of contents，就可以进行设置了</description>
+    </item>
+    
+    <item>
+      <title>赵也平的报告</title>
+      <link>/2018/10/18/%E8%B5%B5%E4%B9%9F%E5%B9%B3%E7%9A%84%E6%8A%A5%E5%91%8A/</link>
+      <pubDate>Thu, 18 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/10/18/%E8%B5%B5%E4%B9%9F%E5%B9%B3%E7%9A%84%E6%8A%A5%E5%91%8A/</guid>
+      <description>药物开发流程 ![流程图]()
+药物应该具有特性：
+ 新颖性，选择性 ADME 具有商业价值 副作用小（不要对心脏，内脏造成影响）  </description>
+    </item>
+    
+    <item>
+      <title>BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding论文学习</title>
+      <link>/2018/10/15/bert-pre-training-of-deep-bidirectional-transformers-for-language-understanding/</link>
+      <pubDate>Mon, 15 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/10/15/bert-pre-training-of-deep-bidirectional-transformers-for-language-understanding/</guid>
+      <description> 摘要 本文提出了一个新的语言表达方式叫做 BERT ，代表着Bidirectional Encoder Representations from Transformers。不想其他的语言表达模型，BERT 就是为预处理深度双向表达设计的。因此，BERT可以通过增加一层输出层来实现多种任务，例如问题回答和语言推断，不需要专门针对一个任务来改进结构。BERT是概念上简单以及非常有效，在11个自然语言问题处理很有效果。
+正文 </description>
+    </item>
+    
+    <item>
+      <title>研究思路</title>
+      <link>/2018/10/12/%E7%A0%94%E7%A9%B6%E6%80%9D%E8%B7%AF/</link>
+      <pubDate>Fri, 12 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/10/12/%E7%A0%94%E7%A9%B6%E6%80%9D%E8%B7%AF/</guid>
+      <description> Causality(因果关系) 数据驱动的方法关键在于是否建立了变量之间的因果关系模型。我们所说的两个变量之间的因果关系，是指如果其中一个变量发生了变化，另外一个变量是否会发生相应的变化。数据驱动的模型中变量之间的因果关系完全由数据决定，以及经验模型。如果操作变量没有独立的变化，那么这些变量之间就没有因果关系。
+思路：一个生产过程的状态往往与其生产目标对应，所以应该将模型与输出*y*进行对应，建立条件概率因果关系，针对不同的状态得到不同的因果关系。所以应该将因果关系建立成条件因果关系。
+paper(论文)  Input Design for Online Fault Diagnosis of Nonlinear Systems with Stochastic Uncertainty  </description>
+    </item>
     
     <item>
       <title>Hadoop搭建</title>

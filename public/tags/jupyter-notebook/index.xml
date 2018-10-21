@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Jupyter Notebook on Blog of Feifan Cheng</title>
+    <link>/tags/jupyter-notebook/</link>
+    <description>Recent content in Jupyter Notebook on Blog of Feifan Cheng</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 21 Oct 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/jupyter-notebook/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>jupyter notebook的目录</title>
+      <link>/2018/10/21/jupyter-notebook/</link>
+      <pubDate>Sun, 21 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/10/21/jupyter-notebook/</guid>
+      <description>问题 最近一直用 jupyter notebook 写代码，因为要跑的代码比较长，所以导致整个页面都比较长，导致找到之前写的代码比较困难，这个时候就想着能不能有个目录来显示整个页面的内容，结果发现其实是可以的，就是用的 Jupyter Nbextensions Configurator，里面有许多扩展功能。
+安装扩展 对于使用 Anaconda 的用户，直接使用下面的指令
+conda install -c conda-forge jupyter_nbextensions_configurator  对于使用 pip 的用户，需要用到下面两个指令
+pip install jupyter_nbextensions_configurator  针对特定用户
+jupyter nbextensions_configurator enable --user  访问设置 访问 http://localhost:8888/tree，你就可以看到nbextensions, 看到Table of contents，就可以进行设置了</description>
+    </item>
+    
+  </channel>
+</rss>

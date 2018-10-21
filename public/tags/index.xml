@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>Causality</title>
+      <link>/tags/causality/</link>
+      <pubDate>Fri, 12 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/causality/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Centos</title>
       <link>/tags/centos/</link>
       <pubDate>Wed, 19 Sep 2018 00:00:00 +0000</pubDate>
@@ -48,6 +57,15 @@
     </item>
     
     <item>
+      <title>Forum</title>
+      <link>/tags/forum/</link>
+      <pubDate>Thu, 18 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/forum/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Hadoop</title>
       <link>/tags/hadoop/</link>
       <pubDate>Sat, 29 Sep 2018 00:00:00 +0000</pubDate>
@@ -71,6 +89,24 @@
       <pubDate>Wed, 19 Sep 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/jupyter/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Jupyter Notebook</title>
+      <link>/tags/jupyter-notebook/</link>
+      <pubDate>Sun, 21 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/jupyter-notebook/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Language</title>
+      <link>/tags/language/</link>
+      <pubDate>Mon, 15 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/language/</guid>
       <description></description>
     </item>
     

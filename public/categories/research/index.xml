@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Research on Blog of Feifan Cheng</title>
+    <link>/categories/research/</link>
+    <description>Recent content in Research on Blog of Feifan Cheng</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 12 Oct 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/research/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>研究思路</title>
+      <link>/2018/10/12/%E7%A0%94%E7%A9%B6%E6%80%9D%E8%B7%AF/</link>
+      <pubDate>Fri, 12 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/10/12/%E7%A0%94%E7%A9%B6%E6%80%9D%E8%B7%AF/</guid>
+      <description> Causality(因果关系) 数据驱动的方法关键在于是否建立了变量之间的因果关系模型。我们所说的两个变量之间的因果关系，是指如果其中一个变量发生了变化，另外一个变量是否会发生相应的变化。数据驱动的模型中变量之间的因果关系完全由数据决定，以及经验模型。如果操作变量没有独立的变化，那么这些变量之间就没有因果关系。
+思路：一个生产过程的状态往往与其生产目标对应，所以应该将模型与输出*y*进行对应，建立条件概率因果关系，针对不同的状态得到不同的因果关系。所以应该将因果关系建立成条件因果关系。
+paper(论文)  Input Design for Online Fault Diagnosis of Nonlinear Systems with Stochastic Uncertainty  </description>
+    </item>
+    
+  </channel>
+</rss>
