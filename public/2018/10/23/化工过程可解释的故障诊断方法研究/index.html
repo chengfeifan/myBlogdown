@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.38.2" />
+
+
+<title>化工过程可解释的故障诊断方法研究 - Blog of Feifan Cheng</title>
+<meta property="og:title" content="化工过程可解释的故障诊断方法研究 - Blog of Feifan Cheng">
+
+
+
+  
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.jpg"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="https://github.com/chengfeifan/myBlogdown">GitHub</a></li>
+    
+    <li><a href="https://weibo.com/3012495997/">微博</a></li>
+    
+    <li><a href="/contact/">Contact</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">2 min read</span>
+    
+
+    <h1 class="article-title">化工过程可解释的故障诊断方法研究</h1>
+
+    
+    <span class="article-date">2018/10/23</span>
+    
+
+    <div class="article-content">
+      
+
+<h1 id="方法">方法</h1>
+
+<h1 id="参考文献">参考文献</h1>
+
+<p>1.<a href="https://www.sciencedirect.com/science/article/pii/S0009250918307371">Fault Detection and Pathway Analysis using a Dynamic Bayesian Network</a></p>
+
+<h2 id="文献内容分析">文献内容分析</h2>
+
+<ol>
+<li>研究背景</li>
+</ol>
+
+<p>Timely detection and diagnosis of the root cause of the fault are important to assure process safety, reliable operation, product quality and optimum operational cost.</p>
+
+<p>即时的故障诊断和监测（根原因诊断）对于保障过程安全，可靠性操作，产品质量和最优操作成本具有重要意义。</p>
+
+<p>Data based statistical process monitoring (SPM) tools are popular in the process industries</p>
+
+<p>数据驱动的统计监测方法在流程工业上有许多应用</p>
+
+<p>These methods are not always successful in fault propagation pathway analysis (Yu and Rashid, 2013) and often take longer to present the analysis (Gharahbagheri et al., 2017a, 2015).</p>
+
+<p>多变量监控和其他监控方法并不能找出故障传播路径，经常需要比较长时间来呈现分析结果。</p>
+
+<p>While the knowledge based tools provide excellent performance in fault diagnosis, they lack in robust detection capacity.</p>
+
+<p>基于知识的方法能够提供很好诊断效果，但是鲁棒性不强。</p>
+
+<p>In many hybrid methods, a data based MSPM tool is used to detect the fault in the first stage, and a knowledge based tool is used in the second stage to diagnose the root cause of the fault utilizing the diagnostic information provided by the first stage detection tool.</p>
+
+<p>许多混合的方法，利用多变量监控工具来检测故障，一个基于知识的方法来诊断故障的根本原因，并且利用第一阶段得到的知识。</p>
+
+<p>BNs are mostly used for root cause diagnosis in process monitoring. It is constructed combining process historical data and expert knowledge.</p>
+
+<p>贝叶斯网络经常被用于根原因分析。一般用历史数据和专家知识来建立贝叶斯网络。</p>
+
+<p>Hence, it is evident that a DBN has the potential to perform as an efficient solitary process FDD tool.</p>
+
+<p>因此，动态贝叶斯能够成为一个独立的故障诊断分析工具。</p>
+
+<p>The main objective of this research is to develop a technique which can detect the fault and diagnose the root cause of the fault accurately by utilizing the power of DBN.</p>
+
+<p>本研究主要内容是发展一个基于动态贝叶斯检测和诊断故障根本原因。</p>
+
+<ol>
+<li>预备知识
+贝叶斯网络是有向无环图。节点代表着变量的概率分布，连接线代表着传递概率。贝叶斯网络构建工程：
+1）determining the causal dependency among the variables （决定变量之间的因果关系）
+2）估计先验概率分布
+3）估计条件概率分布</li>
+</ol>
+
+<p>贝叶斯网络无法抓到动态信息。动态贝叶斯可以抓住动态特征。</p>
+
+<ol>
+<li>根据系统动力学建立动态贝叶斯网络结构</li>
+<li>增加节点表示变量在不同时刻的状态</li>
+<li>重复静态贝叶斯网络直至变量对当前系统状态没有影响</li>
+</ol>
+
+<p>A DBN has two robust features: smoothing and prediction inferences.
+动态贝叶斯具有两个鲁棒性特征：光滑和预测推断</p>
+
+<ol>
+<li>总结</li>
+</ol>
+
+<p>1）文章利用动态贝叶斯网络进行故障诊断和监测
+2）文章提出了一个新的监测变量
+3）文章利用最大变化率进行故障诊断</p>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+    
+
+    
+  </body>
+</html>
+

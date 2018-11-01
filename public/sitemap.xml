@@ -3,6 +3,16 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/2018/11/01/%E4%B8%89%E5%91%A8%E5%B9%B4%E7%BA%AA%E5%BF%B5/</loc>
+    <lastmod>2018-11-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2018/10/23/%E5%8C%96%E5%B7%A5%E8%BF%87%E7%A8%8B%E5%8F%AF%E8%A7%A3%E9%87%8A%E7%9A%84%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD%E6%96%B9%E6%B3%95%E7%A0%94%E7%A9%B6/</loc>
+    <lastmod>2018-10-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/2018/10/21/jupyter-notebook/</loc>
     <lastmod>2018-10-21T00:00:00+00:00</lastmod>
   </url>
@@ -104,7 +114,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2018-10-21T00:00:00+00:00</lastmod>
+    <lastmod>2018-11-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -180,6 +190,12 @@
   </url>
   
   <url>
+    <loc>/tags/interpretable/</loc>
+    <lastmod>2018-10-23T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/jupyter/</loc>
     <lastmod>2018-09-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -210,6 +226,18 @@
   </url>
   
   <url>
+    <loc>/tags/love/</loc>
+    <lastmod>2018-11-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/love/</loc>
+    <lastmod>2018-11-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/meeting/</loc>
     <lastmod>2018-09-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -229,7 +257,7 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2018-10-21T00:00:00+00:00</lastmod>
+    <lastmod>2018-11-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -259,7 +287,7 @@
   
   <url>
     <loc>/categories/research/</loc>
-    <lastmod>2018-10-12T00:00:00+00:00</lastmod>
+    <lastmod>2018-10-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
