@@ -1,0 +1,17 @@
+---
+title: java学习文档
+author: ~
+date: '2018-12-06'
+slug: java
+categories: []
+tags: []
+output:
+  blogdown::html_page:
+    toc: true
+    number_sections: true
+---
+
+# Java 学习
+最近有一个项目需要将算法打包成为jar包，所以现在开始重新学习 *java*, 据说 *java* 程序员在市场上还是非常吃香的，通过此次项目开始重新学习 *java*， 并改正自己在程序设计上的思想，坚持每天看一章，并写一个总结，改变自己from now！
+
+## 对象导论

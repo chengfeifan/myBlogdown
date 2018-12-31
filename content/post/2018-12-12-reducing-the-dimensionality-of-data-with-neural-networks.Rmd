@@ -1,0 +1,17 @@
+---
+title: Reducing the Dimensionality of Data with Neural Networks
+author: ~
+date: '2018-12-12'
+slug: reducing-the-dimensionality-of-data-with-neural-networks
+categories: []
+tags: []
+output:
+  blogdown::html_page:
+    toc: true
+    number_sections: true
+---
+Article:[Reducing the Dimensionality of Data with Neural Networks](http://science.sciencemag.org/content/313/5786/504)
+
+# Abstract
+High-dimensional data can be converted to low-dimensional codes by training a multilayer neural network with a small central layer to reconstruct high-dimensional input vectors. Gradient descent can be used for fine-tuning the weights in such “autoencoder” networks, but this works well only if the initial weights are close to a good solution. We describe an effective way of initializing the weights that allows deep autoencoder networks to learn low-dimensional codes that work much better than principal components analysis as a tool to reduce the dimensionality of data.
+
